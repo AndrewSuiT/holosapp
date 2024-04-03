@@ -52,7 +52,7 @@
                                 <h2 class="mt-6 text-xl font-semibold text-gray-900">Acceder a la plataforma</h2>
 
                                 <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-                                    Lorem dolor sit amet consectetur adipisicing elit. Repudiandae iure perspiciatis ipsum. Illo vitae, iste impedit incidunt quia, quo, autem voluptatibus eum possimus veniam inventore quod odit culpa labore expedita.
+                                    Lore test dolor sit amet consectetur adipisicing elit. Repudiandae iure perspiciatis ipsum. Illo vitae, iste impedit incidunt quia, quo, autem voluptatibus eum possimus veniam inventore quod odit culpa labore expedita.
                                 </p>
                             </div>
 
