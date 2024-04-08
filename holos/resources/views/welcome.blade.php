@@ -69,7 +69,7 @@
                                     </svg>
                                 </div>
 
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900">Solicitar Permiso</h2>
+                                <h2 class="mt-6 text-xl font-semibold text-gray-900">Solicitar Permiso ahora</h2>
 
                                 <p class="mt-4 text-gray-500 text-sm leading-relaxed">
                                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur qui reprehenderit sapiente labore? Natus cumque minima quod libero odit error a voluptatum laborum! Cum molestias officia accusantium animi ipsam est!
