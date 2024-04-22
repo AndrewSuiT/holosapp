@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\libroemergenciaController;
 use App\Livewire\Administracion\Rol;
 use App\Livewire\Administracion\Usuario;
 use App\Livewire\Configuracion\Departamento;
@@ -9,6 +10,7 @@ use App\Livewire\Perfil;
 use App\Livewire\Permiso\FormSolicitud;
 use App\Livewire\Permiso\MisPermisos;
 use App\Livewire\Permiso\Solicitud;
+use App\Models\libroemergencia;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +29,8 @@ Route::get('/', function () {
 });
 
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');
+
+Route::resource('libroemergencias', libroemergenciaController::class);
 
 Route::group(['middleware'=> 'auth'],function() {
     Route::get('perfil', Perfil::class)->name('perfil');
@@ -47,4 +51,6 @@ Route::group(['middleware'=> 'auth'],function() {
         Route::get('solicitud', Solicitud::class)->name('permiso.solicitud');
         Route::get('mis-permisos', MisPermisos::class)->name('permiso.mis-permisos');
     });
+
+    
 });
