@@ -1,0 +1,28 @@
+@push('scripts')
+<script>
+    window.addEventListener('delayServicioId', event => {
+        @this.set('empleado.servicioId', '');
+        setTimeout(() => {
+            @this.set('empleado.servicioId', event.detail.servicioId);
+        }, 100);
+    })
+    function confirmar(id = "") {
+        Swal.fire({
+            text: '¿Seguro que desea eliminar?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, eliminar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                confirmButton: 'btn btn-primary',
+                cancelButton: 'btn btn-outline-danger ml-1'
+            },
+            buttonsStyling: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                @this.eliminar(id);
+            }
+        });
+    }
+</script>
+@endpush

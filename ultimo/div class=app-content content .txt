@@ -85,6 +85,12 @@
                                                 {{ $libroemergencias->OBSERV }}</td>
                                             <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">
                                                 {{ $libroemergencias->ACCIONES }}</td>
+                                            <td class="border px-4 py-2 text-center">
+                                                
+                                                    <button type="button"
+                                                        onclick="confirmDelete('{{ $libroemergencias->id }}')"
+                                                        class="border -ml-px">Borrar</button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

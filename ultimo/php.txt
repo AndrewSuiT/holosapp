@@ -1,19 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Livewire;
+//namespace App\Http\Controllers;
 
 use App\Models\libroemergencia;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use Livewire\Component;
 
-class libroemergenciaController extends Controller
+class libroemergenciaController extends Component
 {
+    
+    public $tituloPagina;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->tituloPagina = "Inicio";
         $libroemergencia = libroemergencia::all();
-        return view('libroemergencia.index', compact('libroemergencia'));
+        return view('livewire.libroemergencia.index', compact('libroemergencia'));
     }
 
     /**
@@ -21,7 +26,7 @@ class libroemergenciaController extends Controller
      */
     public function create()
     {
-        return view('libroemergencia.create');
+        return view('livewire.libroemergencia.create');
     }
 
     /**
@@ -82,6 +87,8 @@ class libroemergenciaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $libroemergencia = libroemergencia::findOrFail($id);
+        $libroemergencia->delete();
+        return redirect()->route('libroemergencias.index');
     }
 }

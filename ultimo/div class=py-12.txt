@@ -3,6 +3,7 @@
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6 lg:p-8">
             <form method="POST" action="{{ route('libroemergencias.store') }}" class="max-w-sm mx-auto">
                 @csrf
+                
 
                 <div class="mb-5">
                     <label for="DNI" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DNI</label>
