@@ -38,11 +38,11 @@ class libroemergenciaController extends Component
             'emergencia.FICHAFAM' => 'required',
             'emergencia.NHCL' => 'required',
             'emergencia.CODSIS' => 'required',
-            'emergencia.PLAN' => 'required',
-            'emergencia.SERV' => 'required',
+            'emergencia.PLAN' => 'no required',
+            'emergencia.SERV' => 'no required',
             'emergencia.EMERGENCIA' => 'required',
             'emergencia.APELLIDOSYNOMBRES' => 'required',
-            'emergencia.NCR' => 'required',
+            'emergencia.NCR' => 'no required',
             'emergencia.EDAD' => 'required',
             'emergencia.SEXO' => 'required',
             'emergencia.DIRECCIÓN' => 'required',
@@ -52,7 +52,7 @@ class libroemergenciaController extends Component
             'emergencia.INYECT' => 'required',
             'emergencia.CURAC' => 'required',
             'emergencia.RESPONSABLE' => 'required',
-            'emergencia.OBSERV' => 'required'
+            'emergencia.OBSERV' => 'no required'
         ];
     }
 
