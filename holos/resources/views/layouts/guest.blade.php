@@ -38,6 +38,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('template/assets/css/style.css') }}">
     <!-- END: Custom CSS-->
 
+     <!-- icono de editar y delete -->   
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/font-awesome/css/all.min.css') }}">
+
+
     <!-- Scripts -->
 
     <!-- Styles -->
@@ -59,6 +63,9 @@
 
     <script src="{{ asset('template/app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
+
+    @stack('scripts')
+
     <script>
         $(window).on('load', function() {
             if (feather) {

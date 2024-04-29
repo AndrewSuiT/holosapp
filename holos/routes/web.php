@@ -12,7 +12,6 @@ use App\Livewire\Perfil;
 use App\Livewire\Permiso\FormSolicitud;
 use App\Livewire\Permiso\MisPermisos;
 use App\Livewire\Permiso\Solicitud;
-use App\Models\libroemergencia;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,12 +32,6 @@ Route::get('/', function () {
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');
 
 Route::get('libroemergencias', libroemergenciaController::class)->name('libroemergencia');
-
-Route::get('/create', function () {
-    return view('livewire.libroemergencia.create');
-});
-
-
 
 
 Route::group(['middleware'=> 'auth'],function() {

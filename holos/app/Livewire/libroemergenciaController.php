@@ -1,97 +1,123 @@
 <?php
 
 namespace App\Livewire;
-//namespace App\Http\Controllers;
 
 use App\Models\libroemergencia;
-//use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\DB;
 
 
 class libroemergenciaController extends Component
 {
-    public $mensajes;
+    public $librodeemergencia;
+    public $emergencia;
+    public $tituloModal;
 
-    public $isOpen = 0;
- 
-    public function create()
-    {
-        $this->openModal();
-    }
-    public function openModal()
-    {
-        $this->isOpen = true;
-    }
-    public function closeModal()
-    {
-        $this->isOpen = false;
+    function mount() : void {
+        $this->librodeemergencia = 'Hospital Registro de Emergencia';
+        $this->reseteaDatos();
     }
 
-    public function store( $request)
-    {
-        $request->validate([
-            'DNI'=> 'required|integer|min:1',
-            'FICHAFAM' => 'required|date',
-            'NHCL' => 'required|string|min:1|max:100',
-            'CODSIS' => 'required|string|min:1|max:100',
-            'PLAN' => 'required|string|min:1|max:100',
-            'SERV' => 'required|string|min:1|max:100',
-            'EMERGENCIA' => 'required|string|min:1|max:100',
-            'APELLIDOSYNOMBRES' => 'required|string|min:1|max:100',
-            'NCR' => 'required|string|min:1|max:100',
-            'EDAD' => 'required|integer|min:1',
-            'SEXO' => 'required|string|min:1|max:100',
-            'DIRECCIÓN' => 'required|string|min:1|max:100',
-            'DIAGNOSTICO' => 'required|string|min:1|max:100',
-            'PDR' => 'required|string|min:1|max:100',
-            'TRATAMIENTO' => 'required|string|min:1|max:100',
-            'INYECT' => 'required|string|min:1|max:100',
-            'CURAC' => 'required|string|min:1|max:100',
-            'RESPONSABLE' => 'required|string|min:1|max:100',
-            'OBSERV' => 'required|string|min:1|max:100'
-
-        ]);
-        libroemergencia::create($request->all());
-
-        return redirect()->route('libroemergencias.index');
+    function reseteaDatos() : void {
+        $this->emergencia = new libroemergencia();
     }
 
-    public function show(string $id)
-    {
-        //
+    function inicializaDatos($id = "") : void {
+        if(empty($id)){
+            $this->tituloModal = "Registrar";
+            $this->reseteaDatos();
+        }else{
+            $this->tituloModal = "Editar";
+            $this->emergencia = libroemergencia::find($id);
+        }
+    }
+    function rules() : array {
+        return [
+            'emergencia.DNI' => 'required',
+            'emergencia.FICHAFAM' => 'required',
+            'emergencia.NHCL' => 'required',
+            'emergencia.CODSIS' => 'required',
+            'emergencia.PLAN' => 'required',
+            'emergencia.SERV' => 'required',
+            'emergencia.EMERGENCIA' => 'required',
+            'emergencia.APELLIDOSYNOMBRES' => 'required',
+            'emergencia.NCR' => 'required',
+            'emergencia.EDAD' => 'required',
+            'emergencia.SEXO' => 'required',
+            'emergencia.DIRECCIÓN' => 'required',
+            'emergencia.DIAGNOSTICO' => 'required',
+            'emergencia.PDR' => 'required',
+            'emergencia.TRATAMIENTO' => 'required',
+            'emergencia.INYECT' => 'required',
+            'emergencia.CURAC' => 'required',
+            'emergencia.RESPONSABLE' => 'required',
+            'emergencia.OBSERV' => 'required'
+        ];
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+    function muestraModal($id = "") : void {
+        $this->inicializaDatos($id);
+        $this->resetValidation();
+        $this->dispatch('openModal');
+    }
+    function cierraModal(){
+        $this->dispatch('closeModal');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update($request, string $id)
-    {
-        //
-    }
+    function guardar() : void {
+        $this->validate();
+        DB::beginTransaction();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $libroemergencia = libroemergencia::findOrFail($id);
-        $libroemergencia->delete();
-        return redirect()->route('libroemergencias.index');
+        try {
+            if(!is_null($this->emergencia->id) && $this->emergencia->id != ""){
+                $message = "Actualizado con exito";
+            }else{
+                $message = "Registrado con exito";
+            }
+            $this->emergencia->save();
+
+            $resp["type"] = 'success';
+            $resp["message"] = $message;
+
+            DB::commit();
+            
+            $this->cierraModal();
+        } catch (\Exception $e) {
+            DB::rollback();
+            $resp["type"] = 'error';
+            $resp["message"] = 'No se pudo guardar los datos'. $e->getMessage();
+        }
+        $this->dispatch('alert', $resp);
+    }
+    function eliminar($id){
+        DB::beginTransaction();
+
+        try {
+            $emergencia = libroemergencia::find($id);
+
+            if(is_null($emergencia)){
+                $resp["type"] = 'error';
+                $resp["message"] = 'No encontrado';
+            }else{
+                $emergencia->delete();
+                $resp["type"] = 'success';
+                $resp["message"] = 'Eliminado con exito';
+            }
+            DB::commit();
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            $resp["type"] = 'error';
+            $resp["message"] = 'No se pudo eliminar'. $e->getMessage();
+        }
+        $this->dispatch('alert', $resp);        
     }
 
     #[Layout('layouts.guest')] 
     public function render()
     {
         $libroemergencia = libroemergencia::all();
-        return view('livewire.libroemergencia.index', compact('libroemergencia'));
+        return view('livewire.libroemergencia.libro', compact('libroemergencia'));
     }
 }
