@@ -2,21 +2,30 @@
 
 namespace App\Livewire;
 
-use App\Models\libroemergencia;
+use App\Models\libroemergencia as libroemergencia;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\DB;
+use Livewire\WithPagination;
 
 
+use function Laravel\Prompts\select;
 
 class libroemergenciaController extends Component
 {
+    use WithPagination;
     public $librodeemergencia;
     public $emergencia;
     public $tituloModal;
+    public $search;
+    public $idFICHAFAM;
+    public $FECHASELECT;
 
     function mount() : void {
         $this->librodeemergencia = 'Hospital Registro de Emergencia';
+        $this->search = '';
+        $this->FECHASELECT = '';
+        $this->idFICHAFAM = libroemergencia::orderBy('FICHAFAM', 'asc')->pluck('FICHAFAM')->unique();
         $this->reseteaDatos();
     }
 
@@ -41,7 +50,7 @@ class libroemergenciaController extends Component
             'emergencia.CODSIS' => 'required',
             'emergencia.PLAN' => 'nullable',
             'emergencia.SERV' => 'nullable',
-            'emergencia.EMERGENCIA' => 'required',
+            'emergencia.EMERGENCIA' => 'nullable',
             'emergencia.APELLIDOSYNOMBRES' => 'required',
             'emergencia.NCR' => 'nullable',
             'emergencia.EDAD' => 'required',
@@ -56,7 +65,11 @@ class libroemergenciaController extends Component
             'emergencia.OBSERV' => 'nullable'
         ];
     }
-
+    function validationAttributes() : array {
+        return [
+            'emergencia.FICHAFAM' => 'fichafamid',
+        ];
+    }
     function muestraModal($id = "") : void {
         $this->inicializaDatos($id);
         $this->resetValidation();
@@ -118,7 +131,10 @@ class libroemergenciaController extends Component
     #[Layout('layouts.guest')] 
     public function render()
     {
-        $libroemergencia = libroemergencia::all();
+        $libroemergencia = libroemergencia::where('DNI', 'like', '%'.$this->search.'%')
+
+                            ->orderBy('id')
+                            ->paginate(15);
         return view('livewire.libroemergencia.libro', compact('libroemergencia'));
     }
 }

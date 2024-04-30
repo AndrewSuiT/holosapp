@@ -4,8 +4,6 @@
     </x-slot> 
     
     <div class="app-content content ">
-        <div class="content-overlay"></div>
-        <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
             <div class="content-header row"></div>
             <div class="content-body">
@@ -13,8 +11,18 @@
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6 lg:p-8">
                             <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-                                <div class="mb-4">                                       
-                                </div>
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-xl-2">
+                                                <label class="form-label" for="basicInput">Buscar por DNI</label>
+                                                <input type="text" class="form-control form-control-sm" id="basicInput" placeholder="Buscar..." wire:model.live.debounce.500ms="search">
+                                            </div>
+                                            <div class="col-xl-2">
+                                                <label class="form-label" for="basicInput">Fecha</label>
+                                                <x-select :datas="$idFICHAFAM" wire:model.live="FECHASELECT"/>
+                                            </div>
+                                        </div>
+                                    </div>                                      
                                 <div class="table-responsive">
                                     <table class="table table-sm">
                                         <thead>
@@ -82,6 +90,7 @@
                                             @endforeach
                                         </tbody>                                    
                                     </table>
+                                    {{ $libroemergencia->links() }}
                                 </div>
                             </div>
                         </div>
@@ -90,26 +99,39 @@
             </div>
         </div>
     </div>
-    <x-modal :modalTitulo="$tituloModal">
-        <x-form-input type="number" label='DNI:' model="emergencia.DNI" wire:model='emergencia.DNI' />
-        <x-form-input type="date" label='FICHAFAM:' model="emergencia.FICHAFAM" wire:model='emergencia.FICHAFAM' />
-        <x-form-input label='NHCL:' model="emergencia.NHCL" wire:model='emergencia.NHCL' />
-        <x-form-input label='CODSIS:' model="emergencia.CODSIS" wire:model='emergencia.CODSIS' />
-        <x-form-input label='PLAN:' model="emergencia.PLAN" wire:model='emergencia.PLAN' />
-        <x-form-input label='SERV:' model="emergencia.SERV" wire:model='emergencia.SERV' />
-        <x-form-input label='EMERGENCIA:' model="emergencia.EMERGENCIA" wire:model='emergencia.EMERGENCIA' />
-        <x-form-input label='APELLIDOS Y NOMBRES:' model="emergencia.APELLIDOSYNOMBRES" wire:model='emergencia.APELLIDOSYNOMBRES' />
-        <x-form-select :datas="['N'=> 'N', 'C' => 'C', 'R' =>'R']" label='NCR: ' model="emergencia.NCR" wire:model='emergencia.NCR'/>
-        <x-form-input type="number" label='EDAD:' model="emergencia.EDAD" wire:model='emergencia.EDAD' />        
-        <x-form-input label='SEXO:' model="emergencia.SEXO" wire:model='emergencia.SEXO' />
-        <x-form-input label='DIRECCIÓN:' model="emergencia.DIRECCIÓN" wire:model='emergencia.DIRECCIÓN' />
-        <x-form-input label='DIAGNOSTICO:' model="emergencia.DIAGNOSTICO" wire:model='emergencia.DIAGNOSTICO' />
-        <x-form-input label='PDR:' model="emergencia.PDR" wire:model='emergencia.PDR' />
-        <x-form-input label='TRATAMIENTO:' model="emergencia.TRATAMIENTO" wire:model='emergencia.TRATAMIENTO' />
-        <x-form-input label='INYECT:' model="emergencia.INYECT" wire:model='emergencia.INYECT' />
-        <x-form-input label='CURAC:' model="emergencia.CURAC" wire:model='emergencia.CURAC' />
-        <x-form-input label='RESPONSABLE:' model="emergencia.RESPONSABLE" wire:model='emergencia.RESPONSABLE' />
-        <x-form-input label='OBSERV:' model="emergencia.OBSERV" wire:model='emergencia.OBSERV' />
+    <x-modal :modalTitulo="$tituloModal" tipo="modal-xl">
+        <div class="row">
+            <div class="col-sm-4">
+                <x-divider text="." />
+                <x-form-input type="number" label='DNI:' model="emergencia.DNI" wire:model='emergencia.DNI' />
+                <x-form-input type="date" label='FICHAFAM:' model="emergencia.FICHAFAM" wire:model='emergencia.FICHAFAM' />
+                <x-form-input label='NHCL:' model="emergencia.NHCL" wire:model='emergencia.NHCL' />
+                <x-form-input label='CODSIS:' model="emergencia.CODSIS" wire:model='emergencia.CODSIS' />
+                <x-form-input label='PLAN:' model="emergencia.PLAN" wire:model='emergencia.PLAN' />
+                <x-form-input label='SERV:' model="emergencia.SERV" wire:model='emergencia.SERV' />
+            </div>
+            <div class="col-sm-4">
+                <x-divider text="." />
+                <x-form-input label='EMERGENCIA:' model="emergencia.EMERGENCIA" wire:model='emergencia.EMERGENCIA' />
+                <x-form-input label='APELLIDOS Y NOMBRES:' model="emergencia.APELLIDOSYNOMBRES" wire:model='emergencia.APELLIDOSYNOMBRES' />
+                <x-form-select :datas="['N'=> 'N', 'C' => 'C', 'R' =>'R']" label='NCR: ' model="emergencia.NCR" wire:model='emergencia.NCR'/>
+                <x-form-input type="number" label='EDAD:' model="emergencia.EDAD" wire:model='emergencia.EDAD' />        
+                <x-form-select :datas="['F'=> 'Femenino', 'M' => 'Masculino']" label='SEXO:' model="emergencia.SEXO" wire:model='emergencia.SEXO' />
+                <x-form-input label='DIRECCIÓN:' model="emergencia.DIRECCIÓN" wire:model='emergencia.DIRECCIÓN' />
+                <x-form-input label='DIAGNOSTICO:' model="emergencia.DIAGNOSTICO" wire:model='emergencia.DIAGNOSTICO'/>
+            </div>
+            <div class="col-sm-4">
+                <x-divider text="." />
+                <x-form-select :datas="['P'=> 'P', 'D' => 'D', 'R' =>'R']" label='PDR:' model="emergencia.PDR" wire:model='emergencia.PDR' />
+                <x-form-input label='TRATAMIENTO:' model="emergencia.TRATAMIENTO" wire:model='emergencia.TRATAMIENTO' />
+                <x-form-input label='INYECT:' model="emergencia.INYECT" wire:model='emergencia.INYECT' />
+                <x-form-input label='CURAC:' model="emergencia.CURAC" wire:model='emergencia.CURAC' />
+                <x-form-input label='RESPONSABLE:' model="emergencia.RESPONSABLE" wire:model='emergencia.RESPONSABLE' />
+                <div>
+                    <x-form-input label='OBSERV:' model="emergencia.OBSERV" wire:model='emergencia.OBSERV'/>
+                </div>
+            </div>
+        </div>
     </x-modal>
 </x-content-body>
 
