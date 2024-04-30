@@ -8,6 +8,7 @@ use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\DB;
 
 
+
 class libroemergenciaController extends Component
 {
     public $librodeemergencia;
@@ -38,11 +39,11 @@ class libroemergenciaController extends Component
             'emergencia.FICHAFAM' => 'required',
             'emergencia.NHCL' => 'required',
             'emergencia.CODSIS' => 'required',
-            'emergencia.PLAN' => 'no required',
-            'emergencia.SERV' => 'no required',
+            'emergencia.PLAN' => 'nullable',
+            'emergencia.SERV' => 'nullable',
             'emergencia.EMERGENCIA' => 'required',
             'emergencia.APELLIDOSYNOMBRES' => 'required',
-            'emergencia.NCR' => 'no required',
+            'emergencia.NCR' => 'nullable',
             'emergencia.EDAD' => 'required',
             'emergencia.SEXO' => 'required',
             'emergencia.DIRECCIÓN' => 'required',
@@ -52,7 +53,7 @@ class libroemergenciaController extends Component
             'emergencia.INYECT' => 'required',
             'emergencia.CURAC' => 'required',
             'emergencia.RESPONSABLE' => 'required',
-            'emergencia.OBSERV' => 'no required'
+            'emergencia.OBSERV' => 'nullable'
         ];
     }
 

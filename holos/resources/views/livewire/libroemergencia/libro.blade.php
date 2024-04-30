@@ -98,8 +98,8 @@
         <x-form-input label='PLAN:' model="emergencia.PLAN" wire:model='emergencia.PLAN' />
         <x-form-input label='SERV:' model="emergencia.SERV" wire:model='emergencia.SERV' />
         <x-form-input label='EMERGENCIA:' model="emergencia.EMERGENCIA" wire:model='emergencia.EMERGENCIA' />
-        <x-form-input label='APELLIDOSYNOMBRES:' model="emergencia.APELLIDOSYNOMBRES" wire:model='emergencia.APELLIDOSYNOMBRES' />
-        <x-form-input label='NCR:' model="emergencia.NCR" wire:model='emergencia.NCR' />
+        <x-form-input label='APELLIDOS Y NOMBRES:' model="emergencia.APELLIDOSYNOMBRES" wire:model='emergencia.APELLIDOSYNOMBRES' />
+        <x-form-select :datas="['N'=> 'N', 'C' => 'C', 'R' =>'R']" label='NCR: ' model="emergencia.NCR" wire:model='emergencia.NCR'/>
         <x-form-input type="number" label='EDAD:' model="emergencia.EDAD" wire:model='emergencia.EDAD' />        
         <x-form-input label='SEXO:' model="emergencia.SEXO" wire:model='emergencia.SEXO' />
         <x-form-input label='DIRECCIÓN:' model="emergencia.DIRECCIÓN" wire:model='emergencia.DIRECCIÓN' />
