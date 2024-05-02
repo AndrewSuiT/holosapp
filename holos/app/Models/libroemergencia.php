@@ -11,7 +11,4 @@ class libroemergencia extends Model
 
     protected $fillable = ['DNI', 'FICHAFAM', 'NHCL', 'CODSIS', 'PLAN', 'SERV', 'EMERGENCIA', 'APELLIDOSYNOMBRES', 'NCR', 'EDAD', 'SEXO', 'DIRECCIÓN', 'DIAGNOSTICO', 'PDR', 'TRATAMIENTO', 'INYECT', 'CURAC', 'RESPONSABLE', 'OBSERV'];
 
-    function FECHASLIBRO() : BelongsTo {
-        return $this->belongsTo(libroemergencia::class, 'FICHAFAM');
-    }
 }

@@ -7,9 +7,8 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade\Pdf;
 
-
-use function Laravel\Prompts\select;
 
 class libroemergenciaController extends Component
 {
@@ -18,14 +17,24 @@ class libroemergenciaController extends Component
     public $emergencia;
     public $tituloModal;
     public $search;
-    public $idFICHAFAM;
     public $FECHASELECT;
+    public $startDate;
+    public $endDate;
 
+    /*function generarPDF()
+    {
+        $registros = libroemergencia::whereBetween('FICHAFAM', [$this->startDate, $this->endDate])
+                    ->orderBy('id')
+                    ->get();
+
+        $pdf = Pdf::loadView('livewire.libroemergencia.pdf', compact('registros'));
+        return $pdf->download('registros.pdf');
+    }
+    */
     function mount() : void {
         $this->librodeemergencia = 'Hospital Registro de Emergencia';
         $this->search = '';
         $this->FECHASELECT = '';
-        $this->idFICHAFAM = libroemergencia::orderBy('FICHAFAM', 'asc')->pluck('FICHAFAM')->unique();
         $this->reseteaDatos();
     }
 
@@ -37,6 +46,7 @@ class libroemergenciaController extends Component
         if(empty($id)){
             $this->tituloModal = "Registrar";
             $this->reseteaDatos();
+            $this->emergencia->FICHAFAM = now()->format('Y-m-d');
         }else{
             $this->tituloModal = "Editar";
             $this->emergencia = libroemergencia::find($id);
@@ -65,11 +75,7 @@ class libroemergenciaController extends Component
             'emergencia.OBSERV' => 'nullable'
         ];
     }
-    function validationAttributes() : array {
-        return [
-            'emergencia.FICHAFAM' => 'fichafamid',
-        ];
-    }
+
     function muestraModal($id = "") : void {
         $this->inicializaDatos($id);
         $this->resetValidation();
@@ -84,9 +90,16 @@ class libroemergenciaController extends Component
         DB::beginTransaction();
 
         try {
+            $existingRecord = libroemergencia::find($this->emergencia->id);
+
             if(!is_null($this->emergencia->id) && $this->emergencia->id != ""){
+                $existingRecord->update($this->emergencia->toArray());
                 $message = "Actualizado con exito";
             }else{
+                $lastRecord = libroemergencia::latest()->first();
+                $nextId = $lastRecord ? $lastRecord->id + 1 : 1;
+                $this->emergencia->id = $nextId;
+                $this->emergencia->save();
                 $message = "Registrado con exito";
             }
             $this->emergencia->save();
@@ -115,6 +128,7 @@ class libroemergenciaController extends Component
                 $resp["message"] = 'No encontrado';
             }else{
                 $emergencia->delete();
+                libroemergencia::where('id', '>', $id)->decrement('id');
                 $resp["type"] = 'success';
                 $resp["message"] = 'Eliminado con exito';
             }
@@ -131,10 +145,15 @@ class libroemergenciaController extends Component
     #[Layout('layouts.guest')] 
     public function render()
     {
-        $libroemergencia = libroemergencia::where('DNI', 'like', '%'.$this->search.'%')
+        // funcion de filtro de rango de fechas
+        $query = libroemergencia::query();
+        if ($this->startDate && $this->endDate) {
+        $query->whereBetween('FICHAFAM', [$this->startDate, $this->endDate]);
+        }
 
-                            ->orderBy('id')
-                            ->paginate(15);
+        $libroemergencia = $query->where('FICHAFAM', 'like', '%' . $this->search . '%')
+            ->orderBy('id')
+            ->paginate(15);
         return view('livewire.libroemergencia.libro', compact('libroemergencia'));
     }
 }
