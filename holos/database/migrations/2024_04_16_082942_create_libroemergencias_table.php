@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('libroemergencias', function (Blueprint $table) {
             $table->id();
             $table->string('DNI')->nullable();
-            $table->date('FICHAFAM')->nullable();
+            $table->dateTime('FICHAFAM')->nullable();
             $table->string('NHCL')->nullable();
             $table->string('CODSIS')->nullable();
             $table->string('PLAN')->nullable();

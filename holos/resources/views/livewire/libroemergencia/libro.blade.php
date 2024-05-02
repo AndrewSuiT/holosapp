@@ -102,7 +102,7 @@
             <div class="col-sm-4">
                 <x-divider text="." />
                 <x-form-input type="number" label='DNI:' model="emergencia.DNI" wire:model='emergencia.DNI' />
-                <x-form-input type="date" label='FICHAFAM:' model="emergencia.FICHAFAM"
+                <x-form-input type="datetime-local" label='FICHAFAM:' model="emergencia.FICHAFAM"
                     wire:model='emergencia.FICHAFAM' />
                 <x-form-input label='NHCL:' model="emergencia.NHCL" wire:model='emergencia.NHCL' />
                 <x-form-input label='CODSIS:' model="emergencia.CODSIS" wire:model='emergencia.CODSIS' />
