@@ -40,7 +40,9 @@
 
      <!-- icono de editar y delete -->   
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/font-awesome/css/all.min.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/font-awesome/css/all.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
 
     <!-- Scripts -->
 

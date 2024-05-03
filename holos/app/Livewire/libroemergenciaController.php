@@ -7,8 +7,6 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
 
 
 class libroemergenciaController extends Component
@@ -22,31 +20,6 @@ class libroemergenciaController extends Component
     public $startDate;
     public $endDate;
 
-    /*function generarPDF()
-    {
-        $registros = libroemergencia::whereBetween('FICHAFAM', [$this->startDate, $this->endDate])
-                    ->orderBy('id')
-                    ->get();
-
-        $pdf = Pdf::loadView('livewire.libroemergencia.pdf', compact('registros'));
-        return $pdf->download('registros.pdf');
-    }
-    
-    public function setFICHAFAMAttribute($value)
-    {
-        // Formatear la fecha y hora usando Carbon
-        $formattedDate = Carbon::parse($value)->format('d-m-Y h:i');
-        // Establecer la columna FICHAFAM en el formato deseado
-        $this->attributes['FICHAFAM'] = $formattedDate;
-    }
-
-    // Método de acceso para la columna FICHAFAM
-    public function getFICHAFAMAttribute($value)
-    {
-        // Formatear la fecha y hora usando Carbon
-        return Carbon::parse($value)->format('d-m-Y h:i');
-    }
-    */
     function mount() : void {
         $this->librodeemergencia = 'Hospital Registro de Emergencia';
         $this->search = '';
@@ -56,13 +29,14 @@ class libroemergenciaController extends Component
 
     function reseteaDatos() : void {
         $this->emergencia = new libroemergencia();
+        $this->emergencia->EMERGENCIA = false;
     }
 
     function inicializaDatos($id = "") : void {
         if(empty($id)){
             $this->tituloModal = "Registrar";
             $this->reseteaDatos();
-            $this->emergencia->FICHAFAM = now()->format('Y-m-d H:i');
+            $this->emergencia->FICHAFAM = now()->format('Y-m-d H:m');
         }else{
             $this->tituloModal = "Editar";
             $this->emergencia = libroemergencia::find($id);
@@ -107,6 +81,7 @@ class libroemergenciaController extends Component
 
         try {
             $existingRecord = libroemergencia::find($this->emergencia->id);
+            $this->emergencia->EMERGENCIA = $this->emergencia->EMERGENCIA ? 'SI' : 'NO';
 
             if(!is_null($this->emergencia->id) && $this->emergencia->id != ""){
                 $existingRecord->update($this->emergencia->toArray());
