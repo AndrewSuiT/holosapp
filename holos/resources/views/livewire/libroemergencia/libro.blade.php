@@ -118,7 +118,7 @@
                 <x-form-input label='DIAGNOSTICO:' model="emergencia.DIAGNOSTICO" wire:model='emergencia.DIAGNOSTICO' />
                 <div class="text-nowrap p-tb-0">
                     <label style="font-size: 0.86rem; margin-top: 8px;" for="inlineCheckbox1">EMERGENCIA: </label>                  
-                    <input class="form-check-input" style="margin-left: 18.6%; margin-top: 3px; width: 20px; height: 20px;" type="checkbox" id="emergencia.EMERGENCIA" wire:model.live="emergencia.EMERGENCIA">                   
+                    <input class="form-check-input" style="margin-left: 20%; margin-top: 3px; width: 20px; height: 20px;" type="checkbox" id="emergencia.EMERGENCIA" wire:model.live="emergencia.EMERGENCIA">                   
                 </div>
             </div>
             <div class="col-sm-4">

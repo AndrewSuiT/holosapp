@@ -19,11 +19,13 @@ class libroemergenciaController extends Component
     public $FECHASELECT;
     public $startDate;
     public $endDate;
+    public $cie_10;
 
     function mount() : void {
         $this->librodeemergencia = 'Hospital Registro de Emergencia';
         $this->search = '';
         $this->FECHASELECT = '';
+        $this->cie_10 = select_values('cie10hais', 'CIE10_X', [], ['CIE10_X', 'asc']);
         $this->reseteaDatos();
     }
 
