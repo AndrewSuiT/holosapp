@@ -66,7 +66,7 @@
                                         <td>{{ $item->EDAD }}</td>
                                         <td>{{ $item->SEXO }}</td>
                                         <td>{{ $item->DIRECCIÓN }}</td>
-                                        <td>{{ $item->diagnosticoId }}</td>
+                                        <td>{{ $item->diagnostico->descripcion_CIE }}</td>
                                         <td>{{ $item->PDR }}</td>
                                         <td>{{ $item->TRATAMIENTO }}</td>
                                         <td>{{ $item->INYECT }}</td>

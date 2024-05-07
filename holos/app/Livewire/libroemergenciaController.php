@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\cie10hai;
 use App\Models\libroemergencia as libroemergencia;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -20,6 +21,7 @@ class libroemergenciaController extends Component
     public $startDate;
     public $endDate;
     public $cie_10;
+    public $diagnostico;
 
     function mount() : void {
         $this->librodeemergencia = 'Hospital Registro de Emergencia';
@@ -31,6 +33,7 @@ class libroemergenciaController extends Component
 
     function reseteaDatos() : void {
         $this->emergencia = new libroemergencia();
+        $this->diagnostico = new cie10hai();
         $this->emergencia->EMERGENCIA = false;
     }
 
