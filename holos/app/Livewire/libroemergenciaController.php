@@ -58,7 +58,7 @@ class libroemergenciaController extends Component
             'emergencia.EDAD' => 'required',
             'emergencia.SEXO' => 'required',
             'emergencia.DIRECCIÓN' => 'required',
-            'emergencia.DIAGNOSTICO' => 'nullable',
+            'emergencia.diagnosticoId' => 'nullable',
             'emergencia.PDR' => 'required',
             'emergencia.TRATAMIENTO' => 'nullable',
             'emergencia.INYECT' => 'nullable',

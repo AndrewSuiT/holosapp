@@ -11,7 +11,7 @@ class libroemergencia extends Model
 
     protected $fillable = ['DNI', 'FICHAFAM', 'NHCL', 'CODSIS', 'PLAN', 'SERV', 'EMERGENCIA', 'APELLIDOSYNOMBRES', 'NCR', 'EDAD', 'SEXO', 'DIRECCIÓN', 'DIAGNOSTICO', 'PDR', 'TRATAMIENTO', 'INYECT', 'CURAC', 'RESPONSABLE', 'OBSERV'];
 
-    function departamento() : BelongsTo {
+    function diagnostico() : BelongsTo {
         return $this->belongsTo(cie10hai::class, 'CIE10_X');
     }
 }

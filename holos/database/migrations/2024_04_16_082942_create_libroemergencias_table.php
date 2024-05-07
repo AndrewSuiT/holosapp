@@ -25,15 +25,16 @@ return new class extends Migration
             $table->integer('EDAD')->nullable();
             $table->string('SEXO')->nullable();
             $table->string('DIRECCIÓN')->nullable();
-            $table->string('DIAGNOSTICO')->nullable();
+            $table->unsignedBigInteger('diagnosticoId');
             $table->string('PDR')->nullable();
             $table->string('TRATAMIENTO')->nullable();
             $table->string('INYECT')->nullable();
             $table->string('CURAC')->nullable();
             $table->string('RESPONSABLE')->nullable();
-            $table->string('OBSERV')->nullable();
-             
+            $table->string('OBSERV')->nullable();             
             $table->timestamps();
+
+            $table->foreign('diagnosticoId')->references('id')->on('cie10hais');
         });
     }
 
