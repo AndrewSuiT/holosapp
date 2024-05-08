@@ -33,8 +33,8 @@ class libroemergenciaController extends Component
 
     function reseteaDatos() : void {
         $this->emergencia = new libroemergencia();
-        $this->diagnostico = new cie10hai();
         $this->emergencia->EMERGENCIA = false;
+        $this->diagnostico = new cie10hai();
     }
 
     function inicializaDatos($id = "") : void {

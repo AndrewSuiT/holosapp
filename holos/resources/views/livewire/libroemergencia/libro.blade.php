@@ -66,7 +66,7 @@
                                         <td>{{ $item->EDAD }}</td>
                                         <td>{{ $item->SEXO }}</td>
                                         <td>{{ $item->DIRECCIÓN }}</td>
-                                        <td>{{ $item->diagnostico->descripcion_CIE }}</td>
+                                        <td>{{ $item->diagnostico->CIE10_X . ' - ' . $item->diagnostico->descripcion_CIE }}</td>
                                         <td>{{ $item->PDR }}</td>
                                         <td>{{ $item->TRATAMIENTO }}</td>
                                         <td>{{ $item->INYECT }}</td>
@@ -115,7 +115,9 @@
                 <x-form-input type="number" label='EDAD:' model="emergencia.EDAD" wire:model='emergencia.EDAD' />
                 <x-form-select :datas="['F' => 'Femenino', 'M' => 'Masculino']" label='SEXO:' model="emergencia.SEXO" wire:model='emergencia.SEXO' />
                 <x-form-input label='DIRECCIÓN:' model="emergencia.DIRECCIÓN" wire:model='emergencia.DIRECCIÓN' />
-                <x-form-select :datas="$cie_10" label='DIAGNOSTICO: ' model="emergencia.diagnosticoId" wire:model='emergencia.diagnosticoId'/>
+                <div>
+                    <x-form-select :datas="$cie_10" label='DIAGNOSTICO: ' model="emergencia.diagnosticoId" wire:model='emergencia.diagnosticoId'/>
+                </div>
                 <div class="text-nowrap p-tb-0">
                     <label style="font-size: 0.86rem; margin-top: 8px;" for="inlineCheckbox1">EMERGENCIA: </label>                  
                     <input class="form-check-input" style="margin-left: 20%; margin-top: 3px; width: 20px; height: 20px;" type="checkbox" id="emergencia.EMERGENCIA" wire:model.live="emergencia.EMERGENCIA">                   
