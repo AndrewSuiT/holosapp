@@ -22,6 +22,8 @@ class libroemergenciaController extends Component
     public $endDate;
     public $cie_10;
     public $diagnostico;
+    public $filtrodiagnostico;
+    public $busquedaDiagnostico;
 
     function mount() : void {
         $this->librodeemergencia = 'Hospital Registro de Emergencia';
@@ -138,6 +140,11 @@ class libroemergenciaController extends Component
         $this->dispatch('alert', $resp);        
     }
 
+    public function buscarDiagnostico()
+    {
+
+    }
+
     #[Layout('layouts.guest')] 
     public function render()
     {
@@ -146,10 +153,14 @@ class libroemergenciaController extends Component
         if ($this->startDate && $this->endDate) {
         $query->whereBetween('FICHAFAM', [$this->startDate, $this->endDate]);
         }
+        $this->filtrodiagnostico = cie10hai::where('CIE10_X','like', '%'. $this->busquedaDiagnostico. '%')
+            ->orWhere('descripcion_CIE', 'like', '%' . $this->busquedaDiagnostico. '%')
+            ->get();
 
         $libroemergencia = $query->where('FICHAFAM', 'like', '%' . $this->search . '%')
             ->orderBy('id')
             ->paginate(15);
+
         return view('livewire.libroemergencia.libro', compact('libroemergencia'));
     }
 }

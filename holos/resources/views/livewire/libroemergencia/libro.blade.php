@@ -115,8 +115,11 @@
                 <x-form-input type="number" label='EDAD:' model="emergencia.EDAD" wire:model='emergencia.EDAD' />
                 <x-form-select :datas="['F' => 'Femenino', 'M' => 'Masculino']" label='SEXO:' model="emergencia.SEXO" wire:model='emergencia.SEXO' />
                 <x-form-input label='DIRECCIÓN:' model="emergencia.DIRECCIÓN" wire:model='emergencia.DIRECCIÓN' />
+                <x-form-input label='DIAGNOSTICO: ' model='busquedaDiagnostico' wire:model="busquedaDiagnostico"/>
                 <div>
-                    <x-form-select :datas="$cie_10" label='DIAGNOSTICO: ' model="emergencia.diagnosticoId" wire:model='emergencia.diagnosticoId'/>
+                    @foreach ($filtrodiagnostico as $diagnosticosss)
+                        <div>{{ $diagnosticosss->CIE10_X }}</div>
+                    @endforeach
                 </div>
                 <div class="text-nowrap p-tb-0">
                     <label style="font-size: 0.86rem; margin-top: 8px;" for="inlineCheckbox1">EMERGENCIA: </label>                  
@@ -158,5 +161,10 @@
                 }
             });
         }
+    </script>
+    <script>
+        Livewire.on('busquedaDiagnostico', () => {
+            Livewire.emit('buscarDiagnostico', '{{ $busquedaDiagnostico }}');
+        });
     </script>
 @endpush
