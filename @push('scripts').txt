@@ -1,28 +1,30 @@
-@push('scripts')
-<script>
-    window.addEventListener('delayServicioId', event => {
-        @this.set('empleado.servicioId', '');
-        setTimeout(() => {
-            @this.set('empleado.servicioId', event.detail.servicioId);
-        }, 100);
-    })
-    function confirmar(id = "") {
-        Swal.fire({
-            text: '¿Seguro que desea eliminar?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Si, eliminar',
-            cancelButtonText: 'Cancelar',
-            customClass: {
-                confirmButton: 'btn btn-primary',
-                cancelButton: 'btn btn-outline-danger ml-1'
-            },
-            buttonsStyling: false
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @this.eliminar(id);
-            }
-        });
+<div>
+    <label for="listContact">Select contact:</label>
+    <input wire:model="optionContact" type="text" list="listContact" class="form-control">
+    <datalist  name="" id="listContact">
+        @foreach ($contacts as $contact)
+        <option value="{{$contact->name}}">{{$contact->name}}</option>
+        @endforeach
+    </datalist>
+</div>
+
+
+
+<?php
+namespace App\Http\Livewire;
+use App\Models\Contact;
+use Livewire\Component;
+
+class ContactSelect extends Component
+{
+    public $optionContact = '';
+    public function render()
+    {
+        return view(
+            'livewire.contact-select',
+            ['contacts' => Contact::where('name', 'like', "%$this->optionContact%")
+                ->limit(5)
+                ->get()]
+        );
     }
-</script>
-@endpush
+}

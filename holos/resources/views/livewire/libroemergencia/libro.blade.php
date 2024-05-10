@@ -133,6 +133,12 @@
                 <div>
                     <x-form-input label='OBSERV:' model="emergencia.OBSERV" wire:model='emergencia.OBSERV' />
                 </div>
+                <!--<input list='emergencia.diagnosticoId' model="emergencia.diagnostico.Id" wire:model='emergencia.diagnosticoId'/>
+                <datalist id='emergencia.diagnosticoId'>
+                    @foreach ($cie_10 as $id => $descripcion)
+                        <option value="{{ $descripcion }}" data-id="{{ $id }}"></option>
+                    @endforeach
+                </datalist>-->
             </div>
         </div>
     </x-modal>

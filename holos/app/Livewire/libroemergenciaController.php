@@ -28,6 +28,7 @@ class libroemergenciaController extends Component
         $this->search = '';
         $this->FECHASELECT = '';
         $this->cie_10 = select_values('cie10hais', 'CIE10_X', [], ['CIE10_X', 'asc']);
+        //$this->cie_10 = cie10hai::orderBy('CIE10_X', 'asc')->get(['CIE10_X', 'descripcion_CIE']);
         $this->reseteaDatos();
     }
 
