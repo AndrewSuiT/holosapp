@@ -124,8 +124,7 @@
                 <x-form-select :datas="['F' => 'Femenino', 'M' => 'Masculino']" label='SEXO:' model="emergencia.SEXO" wire:model='emergencia.SEXO' />
                 <x-form-input label='DIRECCIÓN:' model="emergencia.DIRECCIÓN" wire:model='emergencia.DIRECCIÓN' />
                 <div>
-                    <label class='col-form-label' >DIAGNOSTICO: </label> 
-                    <input list='emergencia.diagnosticoId' class='form-control-sm-d' model="emergencia.diagnosticoId" wire:model='emergencia.diagnosticoId'/>
+                    <x-form-input list='emergencia.diagnosticoId' label='DIAGNOSTICO: ' model="emergencia.diagnosticoId" wire:model='emergencia.diagnosticoId'/>
                     <datalist id='emergencia.diagnosticoId'>
                         @foreach ($cie_10 as $ide => $descripcion)
                             <option value="{{ $descripcion }}" data-id="{{ $ide }}"></option>
@@ -136,10 +135,7 @@
                     @endif
 
                 </div>
-                <div class="text-nowrap p-tb-0">
-                    <label style="font-size: 0.86rem; margin-top: 8px;" for="inlineCheckbox1">EMERGENCIA: </label>                  
-                    <input class="form-check-input-d" type="checkbox" id="EMERGENCIA2" wire:model.live="emergencia.EMERGENCIA2">                  
-                </div>
+                <x-form-checkbox label='EMERGENCIA:' model="emergencia.EMERGENCIA2" wire:model='emergencia.EMERGENCIA2' />
             </div>
             <div class="col-sm-4">
                 <x-divider text="." />
@@ -148,8 +144,7 @@
                 <x-form-input label='INYECT:' model="emergencia.INYECT" wire:model='emergencia.INYECT' />
                 <x-form-input label='CURAC:' model="emergencia.CURAC" wire:model='emergencia.CURAC' />
                 <div>
-                    <label class='col-form-label' >RESPONSABLE: </label> 
-                    <input list='emergencia.RESPONSABLE' class='form-control-sm-p' model="emergencia.RESPONSABLE" wire:model='emergencia.RESPONSABLE'/>
+                    <x-form-input list='emergencia.RESPONSABLE' label='RESPONSABLE: ' model="emergencia.RESPONSABLE" wire:model='emergencia.RESPONSABLE'/>
                     <datalist id='emergencia.RESPONSABLE'>
                         @foreach ($personal_ai as $ide => $descripcion)
                             <option value="{{ $descripcion }}" data-id="{{ $ide }}"></option>
