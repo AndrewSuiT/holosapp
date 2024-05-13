@@ -19,13 +19,14 @@ return new class extends Migration
             $table->string('CODSIS')->nullable();
             $table->string('PLAN')->nullable();
             $table->string('SERV')->nullable();
-            $table->string('EMERGENCIA')->nullable();
+            $table->string('EMERGENCIA2')->nullable();
             $table->string('APELLIDOSYNOMBRES')->nullable();
             $table->string('NCR')->nullable();
             $table->integer('EDAD')->nullable();
             $table->string('SEXO')->nullable();
             $table->string('DIRECCIÓN')->nullable();
-            $table->unsignedBigInteger('diagnosticoId');
+            $table->string('diagnosticoId')->nullable();
+            //$table->unsignedBigInteger('diagnosticoId');
             $table->string('PDR')->nullable();
             $table->string('TRATAMIENTO')->nullable();
             $table->string('INYECT')->nullable();
@@ -34,7 +35,7 @@ return new class extends Migration
             $table->string('OBSERV')->nullable();             
             $table->timestamps();
 
-            $table->foreign('diagnosticoId')->references('id')->on('cie10hais');
+            //$table->foreign('diagnosticoId')->references('id')->on('cie10hais');
         });
     }
 

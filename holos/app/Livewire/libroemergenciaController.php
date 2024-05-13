@@ -4,10 +4,12 @@ namespace App\Livewire;
 
 use App\Models\cie10hai;
 use App\Models\libroemergencia as libroemergencia;
+use App\Models\personalcs;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
+use Illuminate\Validation\Rule;
 
 
 class libroemergenciaController extends Component
@@ -17,25 +19,34 @@ class libroemergenciaController extends Component
     public $emergencia;
     public $tituloModal;
     public $search;
+    public $search2;
     public $FECHASELECT;
     public $startDate;
     public $endDate;
     public $cie_10;
-    public $diagnostico;
+    public $personal_ai;
+    public $mensajeError = '';
+    public $mensajeError2 = '';
+
 
     function mount() : void {
         $this->librodeemergencia = 'Hospital Registro de Emergencia';
         $this->search = '';
-        $this->FECHASELECT = '';
-        $this->cie_10 = select_values('cie10hais', 'CIE10_X', [], ['CIE10_X', 'asc']);
-        //$this->cie_10 = cie10hai::orderBy('CIE10_X', 'asc')->get(['CIE10_X', 'descripcion_CIE']);
+        $this->search2 = '';
+        $this->FECHASELECT = '';  
+        $this->cie_10 = Cie10Hai::select(DB::raw("CONCAT(CIE10_X, ' - ', descripcion_CIE) AS codigo_descripcion"), 'CIE10_X')
+            ->orderBy('CIE10_X', 'asc')
+            ->pluck('codigo_descripcion', 'CIE10_X');
+        $this->personal_ai = personalcs::select(DB::raw("CONCAT(APELLIDOSCOMPLETOS, ', ', NOMBRESCOMPLETOS) AS codigo_personal"), 'APELLIDOSCOMPLETOS')
+            ->orderBy('APELLIDOSCOMPLETOS', 'asc')
+            ->pluck('codigo_personal', 'APELLIDOSCOMPLETOS');
         $this->reseteaDatos();
     }
 
     function reseteaDatos() : void {
         $this->emergencia = new libroemergencia();
-        $this->emergencia->EMERGENCIA = false;
-        $this->diagnostico = new cie10hai();
+        $this->emergencia->EMERGENCIA2 = false;
+        
     }
 
     function inicializaDatos($id = "") : void {
@@ -45,6 +56,7 @@ class libroemergenciaController extends Component
             $this->emergencia->FICHAFAM = now()->format('Y-m-d H:m');
         }else{
             $this->tituloModal = "Editar";
+            $this->reseteaDatos();
             $this->emergencia = libroemergencia::find($id);
         }
     }
@@ -56,21 +68,40 @@ class libroemergenciaController extends Component
             'emergencia.CODSIS' => 'required',
             'emergencia.PLAN' => 'nullable',
             'emergencia.SERV' => 'nullable',
-            'emergencia.EMERGENCIA' => 'nullable',
+            'emergencia.EMERGENCIA2' => 'nullable',
             'emergencia.APELLIDOSYNOMBRES' => 'required',
             'emergencia.NCR' => 'nullable',
             'emergencia.EDAD' => 'required',
             'emergencia.SEXO' => 'required',
             'emergencia.DIRECCIÓN' => 'required',
-            'emergencia.diagnosticoId' => 'nullable',
+            'emergencia.diagnosticoId' => [
+                'nullable',             
+                function ($attribute, $value, $fail) {
+                    $found = $this->cie_10->contains($value);
+                    if (!$found) {
+                        $this->mensajeError = 'El diagnóstico seleccionado no es válido.';
+                        $fail('El diagnóstico seleccionado no es válido.');
+                    }
+                },
+            ],
             'emergencia.PDR' => 'required',
             'emergencia.TRATAMIENTO' => 'nullable',
             'emergencia.INYECT' => 'nullable',
             'emergencia.CURAC' => 'nullable',
-            'emergencia.RESPONSABLE' => 'required',
+            'emergencia.RESPONSABLE' => [
+                'nullable',               
+                function ($attribute, $value, $fail) {
+                    $found = $this->personal_ai->contains($value);
+                    if (!$found) {
+                        $this->mensajeError2 = 'El responsable seleccionado no es válido.';
+                        $fail('El responsable seleccionado no es válido.');
+                    }
+                },
+            ],
             'emergencia.OBSERV' => 'nullable'
         ];
     }
+
 
     function muestraModal($id = "") : void {
         $this->inicializaDatos($id);
@@ -78,19 +109,24 @@ class libroemergenciaController extends Component
         $this->dispatch('openModal');
     }
     function cierraModal(){
+        $this->mensajeError = '';
+        $this->mensajeError2 = '';
         $this->dispatch('closeModal');
     }
 
     function guardar() : void {
+        $this->mensajeError = '';
+        $this->mensajeError2 = '';
         $this->validate();
         DB::beginTransaction();
 
         try {
             $existingRecord = libroemergencia::find($this->emergencia->id);
-            $this->emergencia->EMERGENCIA = $this->emergencia->EMERGENCIA ? 'SI' : 'NO';
+            $this->emergencia->EMERGENCIA2 = $this->emergencia->EMERGENCIA2 ? 'SI' : 'NO';
 
             if(!is_null($this->emergencia->id) && $this->emergencia->id != ""){
                 $existingRecord->update($this->emergencia->toArray());
+                $this->emergencia->save();
                 $message = "Actualizado con exito";
             }else{
                 $lastRecord = libroemergencia::latest()->first();
@@ -113,6 +149,7 @@ class libroemergenciaController extends Component
             $resp["message"] = 'No se pudo guardar los datos'. $e->getMessage();
         }
         $this->dispatch('alert', $resp);
+        
     }
     function eliminar($id){
         DB::beginTransaction();
@@ -125,7 +162,7 @@ class libroemergenciaController extends Component
                 $resp["message"] = 'No encontrado';
             }else{
                 $emergencia->delete();
-                libroemergencia::where('id', '>', $id)->decrement('id');
+                //libroemergencia::where('id', '>', $id)->update(['id' => DB::raw('id - 1')]);
                 $resp["type"] = 'success';
                 $resp["message"] = 'Eliminado con exito';
             }
@@ -148,7 +185,11 @@ class libroemergenciaController extends Component
         $query->whereBetween('FICHAFAM', [$this->startDate, $this->endDate]);
         }
 
-        $libroemergencia = $query->where('FICHAFAM', 'like', '%' . $this->search . '%')
+        $libroemergencia = $query->where('DNI', 'like', '%' . $this->search . '%')
+            ->orderBy('id')
+            ->paginate(15);
+
+        $libroemergencia = $query->where('RESPONSABLE', 'like', '%' . $this->search2 . '%')
             ->orderBy('id')
             ->paginate(15);
         return view('livewire.libroemergencia.libro', compact('libroemergencia'));

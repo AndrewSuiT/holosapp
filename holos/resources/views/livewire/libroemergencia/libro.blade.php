@@ -21,6 +21,14 @@
                                 <input type="date" class="form-control form-control-sm" id="basicInput2"
                                     wire:model.lazy="endDate">
                             </div>
+                            <div class="col-md-3">
+                                <label class="form-label" for="basicInput">Buscar DNI</label>
+                                <input type="text" class="form-control form-control-sm" id="basicInput" placeholder="Buscar..." wire:model.live.debounce.500ms="search">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label" for="basicInput">Buscar Responsable</label>
+                                <input type="text" class="form-control form-control-sm" id="basicInput" placeholder="Buscar..." wire:model.live.debounce.500ms="search2">
+                            </div>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -60,13 +68,13 @@
                                         <td>{{ $item->CODSIS }}</td>
                                         <td>{{ $item->PLAN }}</td>
                                         <td>{{ $item->SERV }}</td>
-                                        <td>{{ $item->EMERGENCIA}}</td>
+                                        <td>{{ $item->EMERGENCIA2}}</td>
                                         <td>{{ $item->APELLIDOSYNOMBRES }}</td>
                                         <td>{{ $item->NCR }}</td>
                                         <td>{{ $item->EDAD }}</td>
                                         <td>{{ $item->SEXO }}</td>
                                         <td>{{ $item->DIRECCIÓN }}</td>
-                                        <td>{{ $item->diagnostico->CIE10_X . ' - ' . $item->diagnostico->descripcion_CIE }}</td>
+                                        <td>{{ $item->diagnosticoId }}</td>
                                         <td>{{ $item->PDR }}</td>
                                         <td>{{ $item->TRATAMIENTO }}</td>
                                         <td>{{ $item->INYECT }}</td>
@@ -116,11 +124,21 @@
                 <x-form-select :datas="['F' => 'Femenino', 'M' => 'Masculino']" label='SEXO:' model="emergencia.SEXO" wire:model='emergencia.SEXO' />
                 <x-form-input label='DIRECCIÓN:' model="emergencia.DIRECCIÓN" wire:model='emergencia.DIRECCIÓN' />
                 <div>
-                    <x-form-select :datas="$cie_10" label='DIAGNOSTICO: ' model="emergencia.diagnosticoId" wire:model='emergencia.diagnosticoId'/>
+                    <label class='col-form-label' >DIAGNOSTICO: </label> 
+                    <input list='emergencia.diagnosticoId' class='form-control-sm-d' model="emergencia.diagnosticoId" wire:model='emergencia.diagnosticoId'/>
+                    <datalist id='emergencia.diagnosticoId'>
+                        @foreach ($cie_10 as $ide => $descripcion)
+                            <option value="{{ $descripcion }}" data-id="{{ $ide }}"></option>
+                        @endforeach
+                    </datalist>
+                    @if ($mensajeError)
+                        <div class="alert alert-danger">{{ $mensajeError }}</div>
+                    @endif
+
                 </div>
                 <div class="text-nowrap p-tb-0">
                     <label style="font-size: 0.86rem; margin-top: 8px;" for="inlineCheckbox1">EMERGENCIA: </label>                  
-                    <input class="form-check-input" style="margin-left: 20%; margin-top: 3px; width: 20px; height: 20px;" type="checkbox" id="emergencia.EMERGENCIA" wire:model.live="emergencia.EMERGENCIA">                   
+                    <input class="form-check-input-d" type="checkbox" id="EMERGENCIA2" wire:model.live="emergencia.EMERGENCIA2">                  
                 </div>
             </div>
             <div class="col-sm-4">
@@ -129,16 +147,20 @@
                 <x-form-input label='TRATAMIENTO:' model="emergencia.TRATAMIENTO" wire:model='emergencia.TRATAMIENTO' />
                 <x-form-input label='INYECT:' model="emergencia.INYECT" wire:model='emergencia.INYECT' />
                 <x-form-input label='CURAC:' model="emergencia.CURAC" wire:model='emergencia.CURAC' />
-                <x-form-input label='RESPONSABLE:' model="emergencia.RESPONSABLE" wire:model='emergencia.RESPONSABLE' />
                 <div>
-                    <x-form-input label='OBSERV:' model="emergencia.OBSERV" wire:model='emergencia.OBSERV' />
+                    <label class='col-form-label' >RESPONSABLE: </label> 
+                    <input list='emergencia.RESPONSABLE' class='form-control-sm-p' model="emergencia.RESPONSABLE" wire:model='emergencia.RESPONSABLE'/>
+                    <datalist id='emergencia.RESPONSABLE'>
+                        @foreach ($personal_ai as $ide => $descripcion)
+                            <option value="{{ $descripcion }}" data-id="{{ $ide }}"></option>
+                        @endforeach
+                    </datalist>
+                    @if ($mensajeError2)
+                        <div class="alert alert-danger">{{ $mensajeError2 }}</div>
+                    @endif
                 </div>
-                <!--<input list='emergencia.diagnosticoId' model="emergencia.diagnostico.Id" wire:model='emergencia.diagnosticoId'/>
-                <datalist id='emergencia.diagnosticoId'>
-                    @foreach ($cie_10 as $id => $descripcion)
-                        <option value="{{ $descripcion }}" data-id="{{ $id }}"></option>
-                    @endforeach
-                </datalist>-->
+                <x-form-input label='OBSERV:' model="emergencia.OBSERV" wire:model='emergencia.OBSERV' />
+                
             </div>
         </div>
     </x-modal>
