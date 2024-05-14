@@ -35,6 +35,7 @@ Route::get('libroemergencias', libroemergenciaController::class)->name('libroeme
 
 
 Route::group(['middleware'=> 'auth'],function() {
+    
     Route::get('perfil', Perfil::class)->name('perfil');
 
     Route::get('inicio', Inicio::class)->name('inicio');
@@ -53,6 +54,7 @@ Route::group(['middleware'=> 'auth'],function() {
         Route::get('solicitud', Solicitud::class)->name('permiso.solicitud');
         Route::get('mis-permisos', MisPermisos::class)->name('permiso.mis-permisos');
     });
+    Route::get('libroemergencias', libroemergenciaController::class)->name('libroemergencia');
 
     
 });
