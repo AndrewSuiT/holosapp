@@ -53,11 +53,12 @@ class libroemergenciaController extends Component
         if(empty($id)){
             $this->tituloModal = "Registrar";
             $this->reseteaDatos();
-            $this->emergencia->FICHAFAM = now()->format('Y-m-d H:m');
+            $this->emergencia->FICHAFAM = now()->format('Y-m-d H:i');
         }else{
             $this->tituloModal = "Editar";
             $this->reseteaDatos();
             $this->emergencia = libroemergencia::find($id);
+            $this->emergencia->EMERGENCIA2 = $this->emergencia->EMERGENCIA2 === 'SI';
         }
     }
     function rules() : array {
@@ -162,9 +163,10 @@ class libroemergenciaController extends Component
                 $resp["message"] = 'No encontrado';
             }else{
                 $emergencia->delete();
-                //libroemergencia::where('id', '>', $id)->update(['id' => DB::raw('id - 1')]);
+                libroemergencia::where('id', '>', $id)->update(['id' => DB::raw('id - 1')]);
                 $resp["type"] = 'success';
                 $resp["message"] = 'Eliminado con exito';
+                $this->emergencia = libroemergencia::find($id);
             }
             DB::commit();
 
