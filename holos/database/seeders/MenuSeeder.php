@@ -93,6 +93,23 @@ class MenuSeeder extends Seeder
                     ]
                 ]
             ],
+            [
+                'name' => 'Emergencia',
+                'routeName' => 'emergencias',
+                'slug' => 'emergencias',
+                'icon' => 'square',
+                'order' => 5,
+                'children' => [
+                    [
+                        'name' => 'Libro de Emergencias',
+                        'routeName' => 'emergencias.libroemergencias',
+                        'slug' => 'emergencias/libroemergencias',
+                        'icon' => 'circle',
+                        'order' => 1,
+                        
+                    ]
+                ]
+            ],
         ];
         $this->insertDatas($data);
     }

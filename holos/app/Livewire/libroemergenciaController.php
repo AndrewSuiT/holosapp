@@ -99,6 +99,16 @@ class libroemergenciaController extends Component
                     }
                 },
             ],
+            'emergencia.RESPONSABLE_MED' => [
+                'nullable',               
+                function ($attribute, $value, $fail) {
+                    $found = $this->personal_ai->contains($value);
+                    if (!$found) {
+                        $this->mensajeError2 = 'El responsable seleccionado no es válido.';
+                        $fail('El responsable seleccionado no es válido.');
+                    }
+                },
+            ],
             'emergencia.OBSERV' => 'nullable'
         ];
     }
@@ -178,7 +188,7 @@ class libroemergenciaController extends Component
         $this->dispatch('alert', $resp);        
     }
 
-    #[Layout('layouts.guest')] 
+    #[Layout('layouts.app2')] 
     public function render()
     {
         // funcion de filtro de rango de fechas

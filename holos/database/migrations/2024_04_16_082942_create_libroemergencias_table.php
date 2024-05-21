@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('INYECT')->nullable();
             $table->string('CURAC')->nullable();
             $table->string('RESPONSABLE')->nullable();
+            $table->string('RESPONSABLE_MED')->nullable();
             $table->string('OBSERV')->nullable();             
             $table->timestamps();
 
