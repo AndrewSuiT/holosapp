@@ -31,7 +31,7 @@ Route::get('/', function () {
 
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');
 
-Route::get('libroemergencias', libroemergenciaController::class)->name('libroemergencia');
+//Route::get('libroemergencias', libroemergenciaController::class)->name('libroemergencia');
 
 
 Route::group(['middleware'=> 'auth'],function() {
