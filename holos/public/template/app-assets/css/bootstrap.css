@@ -1719,7 +1719,7 @@ progress {
   opacity: 1; }
 
 .form-control::file-selector-button {
-  padding: 0.571rem 1rem;
+  padding: 0.571rem rem;
   margin: -0.571rem -1rem;
   margin-inline-end: 1rem;
   color: #6e6b7b;

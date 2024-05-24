@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('EMERGENCIA2')->nullable();
             $table->string('APELLIDOSYNOMBRES')->nullable();
             $table->string('NCR')->nullable();
-            $table->integer('EDAD')->nullable();
+            $table->string('EDAD')->nullable();
             $table->string('SEXO')->nullable();
             $table->string('DIRECCIÓN')->nullable();
             $table->string('diagnosticoId')->nullable();

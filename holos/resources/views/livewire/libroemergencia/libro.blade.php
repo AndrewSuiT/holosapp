@@ -1,9 +1,11 @@
 <x-content-body :title='$librodeemergencia'>
     <x-slot name="buttons">
-        <button class="btn btn-relief-primary" wire:click='muestraModal'>Registrar</button>
+        <button class="btn btn-relief-primary" id="btn-xlsx" style='margin-right: 5rem ; background-color:#2c7900'>
+            <i class="fa fa-download"></i>
+            Descargar Libro
+        </button>
+        <button class="btn btn-relief-primary" wire:click='muestraModal' style="padding: 1rem 2rem">Registrar</button>
     </x-slot>
-
-    <!--<button class="btn btn-relief-primary" wire:click="generarPDF">Descargar PDF</button>-->
 
     <div class="row" id="basic-table">
         <div class="col-12">
@@ -20,7 +22,7 @@
                             <input type="date" class="form-control form-control-sm" id="basicInput2"
                                 wire:model.lazy="endDate">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-xl-2">
                             <label class="form-label" for="basicInput">Buscar DNI</label>
                             <input type="text" class="form-control form-control-sm" id="basicInput"
                                 placeholder="Buscar..." wire:model.live.debounce.500ms="search">
@@ -28,6 +30,11 @@
                         <div class="col-md-3">
                             <label class="form-label" for="basicInput">Buscar Responsable</label>
                             <input type="text" class="form-control form-control-sm" id="basicInput"
+                                placeholder="Buscar..." wire:model.live.debounce.500ms="search2">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label" for="basicInput">Buscar Médico</label>
+                            <input type="text" class="form-control form-control-sm" style='padding: 0.271rem 1rem' id="basicInput"
                                 placeholder="Buscar..." wire:model.live.debounce.500ms="search2">
                         </div>
                     </div>
@@ -55,7 +62,7 @@
                                 <th>INYECT</th>
                                 <th>CURAC</th>
                                 <th>RESPONSABLE</th>
-                                <th>RESPONSABLE MED</th>
+                                <th>RES. MEDICO</th>
                                 <th>OBSERV</th>
                                 <th>ACCIONES</th>
                             </tr>
@@ -200,5 +207,16 @@
                 }
             });
         }
+    </script>
+    <script>
+        $(document).ready(function(){
+        $('#btn-xlsx').click(function(){
+            let startDate = $('#basicInput').val();
+            let endDate = $('#basicInput2').val();
+
+            let ruta = @json(route('emergencia.formato-xlsx')) + `?startDate=${startDate}&endDate=${endDate}`;
+            window.open(ruta, '_blank');
+        })
+    })
     </script>
 @endpush

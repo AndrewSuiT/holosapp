@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Emergencia;
 
 use App\Models\cie10hai;
 use App\Models\libroemergencia as libroemergencia;
@@ -9,7 +9,8 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
-use Illuminate\Validation\Rule;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
 class libroemergenciaController extends Component
@@ -186,6 +187,9 @@ class libroemergenciaController extends Component
             $resp["message"] = 'No se pudo eliminar'. $e->getMessage();
         }
         $this->dispatch('alert', $resp);        
+    }
+    function descargarXls() {
+        
     }
 
     #[Layout('layouts.app2')] 

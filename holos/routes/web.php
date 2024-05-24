@@ -7,7 +7,8 @@ use App\Livewire\Configuracion\Departamento;
 use App\Livewire\Configuracion\Servicio;
 use App\Livewire\indexlibro;
 use App\Livewire\Inicio;
-use App\Livewire\libroemergenciaController;
+use App\Livewire\Emergencia\libroemergenciaController;
+use App\Livewire\Emergencia\libroobstetriciaController;
 use App\Livewire\Perfil;
 use App\Livewire\Permiso\FormSolicitud;
 use App\Livewire\Permiso\MisPermisos;
@@ -56,6 +57,8 @@ Route::group(['middleware'=> 'auth'],function() {
     });
     Route::prefix('emergencias')->group(function () {
         Route::get('libroemergencias', libroemergenciaController::class)->name('emergencias.libroemergencias');
+        Route::get('general-xlsx/', [App\Http\Controllers\emergenciaformato::class, 'generalXls'])->name('emergencia.formato-xlsx');
+        Route::get('obstetricia', libroobstetriciaController::class)->name('emergencias.obstetricia');
     });
     
 });
