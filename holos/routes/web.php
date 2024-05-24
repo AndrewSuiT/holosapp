@@ -9,6 +9,8 @@ use App\Livewire\Perfil;
 use App\Livewire\Permiso\FormSolicitud;
 use App\Livewire\Permiso\MisPermisos;
 use App\Livewire\Permiso\Solicitud;
+use App\Livewire\Estadistica\EstadisticaController;
+use App\Livewire\Anexo\AnexoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +27,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+//            carpeta y archivo de la vista                               carpeta del controlador y (...)
+//Route::get('estadistica/reporte', EstadisticaController::class)->name('estadistica.reporte');
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');
+Route::get('anexo/anexo', AnexoController::class)->name('anexo.anexo');
+
 
 Route::group(['middleware'=> 'auth'],function() {
     Route::get('perfil', Perfil::class)->name('perfil');
@@ -47,4 +52,8 @@ Route::group(['middleware'=> 'auth'],function() {
         Route::get('solicitud', Solicitud::class)->name('permiso.solicitud');
         Route::get('mis-permisos', MisPermisos::class)->name('permiso.mis-permisos');
     });
+    Route::prefix('estadistica')->group(function () {
+        Route::get('estadistica/reporte', EstadisticaController::class)->name('estadistica.reporte');
+    });
+
 });

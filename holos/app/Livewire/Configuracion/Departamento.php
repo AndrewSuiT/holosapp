@@ -97,7 +97,7 @@ class Departamento extends Component
     {
         $departamentos = DepartamentoHospital::where('descripcion', 'like', '%'.$this->search.'%')
                             ->orderBy('descripcion')
-                            ->paginate(10);
+                            ->paginate(2);
         
         return view('livewire.configuracion.departamento', compact('departamentos'));
     }
