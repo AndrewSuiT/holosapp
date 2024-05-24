@@ -35,7 +35,7 @@
                         <div class="col-md-3">
                             <label class="form-label" for="basicInput">Buscar Médico</label>
                             <input type="text" class="form-control form-control-sm" style='padding: 0.271rem 1rem' id="basicInput"
-                                placeholder="Buscar..." wire:model.live.debounce.500ms="search2">
+                                placeholder="Buscar..." wire:model.live.debounce.500ms="search3">
                         </div>
                     </div>
                 </div>

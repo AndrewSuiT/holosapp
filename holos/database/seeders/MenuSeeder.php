@@ -97,7 +97,7 @@ class MenuSeeder extends Seeder
                 'name' => 'Emergencia',
                 'routeName' => 'emergencias',
                 'slug' => 'emergencias',
-                'icon' => 'square',
+                'icon' => 'triangle',
                 'order' => 5,
                 'children' => [
                     [
@@ -106,6 +106,14 @@ class MenuSeeder extends Seeder
                         'slug' => 'emergencias/libroemergencias',
                         'icon' => 'circle',
                         'order' => 1,
+                        
+                    ],
+                    [
+                        'name' => 'Libro de Obstetricia',
+                        'routeName' => 'emergencias.obstetricia',
+                        'slug' => 'emergencias/obstetricia',
+                        'icon' => 'circle',
+                        'order' => 2,
                         
                     ]
                 ]

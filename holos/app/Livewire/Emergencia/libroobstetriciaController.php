@@ -3,6 +3,8 @@
 namespace App\Livewire\Emergencia;
 
 use App\Models\libroobstetricia;
+use App\Models\personalcs;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -14,27 +16,30 @@ class libroobstetriciaController extends Component
     public $tituloObstetricia;
     public $obstetrico;
     public $tituloModal, $obstetrica;
-    public $FECHASELECT;
-    public $startDate;
-    public $endDate;
-    public $search, $search2;
+    public $FECHASELECT, $startDate, $endDate;
+    public $personal_ai, $mensajeError, $mensajeError2;
+    public $search, $search2, $search3;
 
     public function mount(): void{
         $this->tituloObstetricia = "Libro de Atencion de Partos";
         $this->FECHASELECT = '';
         $this->search = '';
         $this->search2 = '';
+        $this->search3 = '';
+        $this->personal_ai = personalcs::select(DB::raw("CONCAT(APELLIDOSCOMPLETOS, ', ', NOMBRESCOMPLETOS) AS codigo_personal"), 'APELLIDOSCOMPLETOS')
+            ->orderBy('APELLIDOSCOMPLETOS', 'asc')
+            ->pluck('codigo_personal', 'APELLIDOSCOMPLETOS');
         $this->reseteaDatos();
     }
     function reseteaDatos() : void {
-        $this->obstetrico = new libroobstetricia();
+        $this->obstetrica = new libroobstetricia();
         
     }
     function inicializaDatos($id = "") : void {
         if(empty($id)){
             $this->tituloModal = "Registrar";
             $this->reseteaDatos();
-            $this->obstetrica->fechahora_parto = now()->format('Y-m-d H:i');
+            $this->obstetrica->fecha_parto = now()->format('Y-m-d');
         }else{
             $this->tituloModal = "Editar";
             $this->reseteaDatos();
@@ -43,34 +48,54 @@ class libroobstetriciaController extends Component
     }
     function rules() : array {
         return [
-            'obstetrica.n_hc' => 'required',
-            'obstetrica.apellidosynombres' => 'required',
-            'obstetrica.edad' => 'required',
-            'obstetrica.g' => 'required',
-            'obstetrica.p' => 'required',
-            'obstetrica.a' => 'required',
-            'obstetrica.hijos_vivos' => 'required',
-            'obstetrica.hijos_fallec' => 'required',
-            'obstetrica.edad_gestacion' => 'required',
-            'obstetrica.n_control' => 'required',
-            'obstetrica.domicilio' => 'required',
-            'obstetrica.fechahora_parto' => 'required',
-            'obstetrica.tipo_parto' => 'required',
-            'obstetrica.duracion_parto1' => 'required',
-            'obstetrica.duracion_parto2' => 'required',
-            'obstetrica.duración_parto3' => 'required',
-            'obstetrica.episotonia' => 'required',
-            'obstetrica.sexo' => 'required',
-            'obstetrica.peso_rn' => 'required',
-            'obstetrica.apgar1' => 'required',
-            'obstetrica.apgar5' => 'required',
-            'obstetrica.talla' => 'required',
-            'obstetrica.p_cefalico' => 'required',
-            'obstetrica.p_toraxico' => 'required',
-            'obstetrica.p_abdominal' => 'required',
-            'obstetrica.h_cl_rn' => 'required',
-            'obstetrica.medico_encargado' => 'required',
-            'obstetrica.observaciones' => 'required',
+            'obstetrica.n_hc' => 'nullable',
+            'obstetrica.apellidosynombres' => 'nullable',
+            'obstetrica.edad' => 'nullable',
+            'obstetrica.g' => 'nullable',
+            'obstetrica.p' => 'nullable',
+            'obstetrica.a' => 'nullable',
+            'obstetrica.hijos_vivos' => 'nullable',
+            'obstetrica.hijos_fallec' => 'nullable',
+            'obstetrica.edad_gestacion' => 'nullable',
+            'obstetrica.n_control' => 'nullable',
+            'obstetrica.domicilio' => 'nullable',
+            'obstetrica.fecha_parto' => 'nullable',
+            'obstetrica.hora_parto' => 'nullable',
+            'obstetrica.tipo_parto' => 'nullable',
+            'obstetrica.duracion_parto1' => 'nullable',
+            'obstetrica.duracion_parto2' => 'nullable',
+            'obstetrica.duracion_parto3' => 'nullable',
+            'obstetrica.episiotonia' => 'nullable',
+            'obstetrica.sexo' => 'nullable',
+            'obstetrica.peso_rn' => 'nullable',
+            'obstetrica.apgar1' => 'nullable',
+            'obstetrica.apgar5' => 'nullable',
+            'obstetrica.talla' => 'nullable',
+            'obstetrica.p_cefalico' => 'nullable',
+            'obstetrica.p_toraxico' => 'nullable',
+            'obstetrica.p_abdominal' => 'nullable',
+            'obstetrica.h_cl_rn' => 'nullable',
+            'obstetrica.encargado' => [
+                'nullable',               
+                function ($attribute, $value, $fail) {
+                    $found = $this->personal_ai->contains($value);
+                    if (!$found) {
+                        $this->mensajeError = 'El responsable seleccionado no es válido.';
+                        $fail('El responsable seleccionado no es válido.');
+                    }
+                },
+            ],
+            'obstetrica.medico_encargado' => [
+                'nullable',               
+                function ($attribute, $value, $fail) {
+                    $found = $this->personal_ai->contains($value);
+                    if (!$found) {
+                        $this->mensajeError2 = 'El responsable seleccionado no es válido.';
+                        $fail('El responsable seleccionado no es válido.');
+                    }
+                },
+            ],
+            'obstetrica.observaciones' => 'nullable',
 
         ];
     }
@@ -80,10 +105,14 @@ class libroobstetriciaController extends Component
         $this->dispatch('openModal');
     }
     function cierraModal(){
+        $this->mensajeError = '';
+        $this->mensajeError2 = '';
         $this->dispatch('closeModal');
     }
 
     function guardar() : void {
+        $this->mensajeError = '';
+        $this->mensajeError2 = '';
         $this->validate();
         DB::beginTransaction();
 
@@ -147,11 +176,18 @@ class libroobstetriciaController extends Component
     public function render()
     {        
         $query = libroobstetricia::query();
+
         if ($this->startDate && $this->endDate) {
-        $query->whereBetween('fechahora_parto', [$this->startDate, $this->endDate]);
+        $query->whereBetween('fecha_parto', [$this->startDate, $this->endDate]);
         }
 
         $libroobstetrico = $query->where('n_hc', 'like', '%' . $this->search . '%')
+            ->orderBy('id')
+            ->paginate(15);
+        $libroobstetrico = $query->where('encargado', 'like', '%' . $this->search2 . '%')
+            ->orderBy('id')
+            ->paginate(15);
+        $libroobstetrico = $query->where('medico_encargado', 'like', '%' . $this->search3 . '%')
             ->orderBy('id')
             ->paginate(15);
         

@@ -19,8 +19,7 @@ class libroemergenciaController extends Component
     public $librodeemergencia;
     public $emergencia;
     public $tituloModal;
-    public $search;
-    public $search2;
+    public $search, $search2, $search3;
     public $FECHASELECT;
     public $startDate;
     public $endDate;
@@ -34,6 +33,7 @@ class libroemergenciaController extends Component
         $this->librodeemergencia = 'Hospital Registro de Emergencia';
         $this->search = '';
         $this->search2 = '';
+        $this->search3 = '';
         $this->FECHASELECT = '';  
         $this->cie_10 = Cie10Hai::select(DB::raw("CONCAT(CIE10_X, ' - ', descripcion_CIE) AS codigo_descripcion"), 'CIE10_X')
             ->orderBy('CIE10_X', 'asc')
@@ -197,6 +197,7 @@ class libroemergenciaController extends Component
     {
         // funcion de filtro de rango de fechas
         $query = libroemergencia::query();
+
         if ($this->startDate && $this->endDate) {
         $query->whereBetween('FICHAFAM', [$this->startDate, $this->endDate]);
         }
@@ -206,6 +207,9 @@ class libroemergenciaController extends Component
             ->paginate(15);
 
         $libroemergencia = $query->where('RESPONSABLE', 'like', '%' . $this->search2 . '%')
+            ->orderBy('id')
+            ->paginate(15);
+        $libroemergencia = $query->where('RESPONSABLE_MED', 'like', '%' . $this->search3 . '%')
             ->orderBy('id')
             ->paginate(15);
         return view('livewire.libroemergencia.libro', compact('libroemergencia'));
