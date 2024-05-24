@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header">
                     <!--<div class="col-xl-4 col-md-6 col-12">-->
-                    <!--<div class="row">-->
+                    <div class="row">
                         <div class="col-xl-2" >
                             <label class="form-label" for="basicInput">Buscar Nro Anexo</label>
                             <input type="text" class="form-control form-control-sm" style="margin-right: 1rem" id="basicInput1" placeholder="Buscar..." wire:model.live.debounce.500ms="search1">
@@ -14,8 +14,7 @@
                             <label class="form-label" for="basicInput">Buscar Descripción Anexo</label>
                             <input type="text" class="form-control form-control-sm" id="basicInput" placeholder="Buscar..." wire:model.live.debounce.500ms="search">
                         </div>
-                        <div class="col-6">
-                        </div>
+                    </div>
                     <!--</div>-->
                 </div>
                 <div class="card-body">

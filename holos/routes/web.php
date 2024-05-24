@@ -7,6 +7,7 @@ use App\Livewire\Configuracion\Departamento;
 use App\Livewire\Configuracion\Servicio;
 use App\Livewire\indexlibro;
 use App\Livewire\Inicio;
+use App\Livewire\Anexo\AnexoController;
 use App\Livewire\Emergencia\libroemergenciaController;
 use App\Livewire\Emergencia\libroobstetriciaController;
 use App\Livewire\Perfil;
@@ -30,9 +31,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//            carpeta y archivo de la vista                               carpeta del controlador y (...)
+//Route::get('estadistica/reporte', EstadisticaController::class)->name('estadistica.reporte');
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');
-
-//Route::get('libroemergencias', libroemergenciaController::class)->name('libroemergencia');
+Route::get('anexo/anexo', AnexoController::class)->name('anexo.anexo');
 
 
 Route::group(['middleware'=> 'auth'],function() {
