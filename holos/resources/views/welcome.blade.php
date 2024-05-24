@@ -92,7 +92,7 @@
                                 <h2 class="mt-6 text-xl font-semibold text-gray-900">Anexos del Hospital</h2>
 
                                 <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-                                    Encontraras los anexos de los servicios, oficinas del hospital.
+                                    Encontraras los anexos de los servicios, oficinas del hospital Alto inclan.
                                 </p>
                             </div>
 
