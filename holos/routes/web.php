@@ -1,16 +1,18 @@
 <?php
 
+//use App\Http\Controllers\libroemergenciaController;
 use App\Livewire\Administracion\Rol;
 use App\Livewire\Administracion\Usuario;
 use App\Livewire\Configuracion\Departamento;
 use App\Livewire\Configuracion\Servicio;
+use App\Livewire\indexlibro;
 use App\Livewire\Inicio;
+use App\Livewire\Emergencia\libroemergenciaController;
+use App\Livewire\Emergencia\libroobstetriciaController;
 use App\Livewire\Perfil;
 use App\Livewire\Permiso\FormSolicitud;
 use App\Livewire\Permiso\MisPermisos;
 use App\Livewire\Permiso\Solicitud;
-use App\Livewire\Estadistica\EstadisticaController;
-use App\Livewire\Anexo\AnexoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,13 +29,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-//            carpeta y archivo de la vista                               carpeta del controlador y (...)
-//Route::get('estadistica/reporte', EstadisticaController::class)->name('estadistica.reporte');
+
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');
-Route::get('anexo/anexo', AnexoController::class)->name('anexo.anexo');
+
+//Route::get('libroemergencias', libroemergenciaController::class)->name('libroemergencia');
 
 
 Route::group(['middleware'=> 'auth'],function() {
+    
     Route::get('perfil', Perfil::class)->name('perfil');
 
     Route::get('inicio', Inicio::class)->name('inicio');
@@ -52,8 +55,10 @@ Route::group(['middleware'=> 'auth'],function() {
         Route::get('solicitud', Solicitud::class)->name('permiso.solicitud');
         Route::get('mis-permisos', MisPermisos::class)->name('permiso.mis-permisos');
     });
-    Route::prefix('estadistica')->group(function () {
-        Route::get('estadistica/reporte', EstadisticaController::class)->name('estadistica.reporte');
+    Route::prefix('emergencias')->group(function () {
+        Route::get('libroemergencias', libroemergenciaController::class)->name('emergencias.libroemergencias');
+        Route::get('general-xlsx/', [App\Http\Controllers\emergenciaformato::class, 'generalXls'])->name('emergencia.formato-xlsx');
+        Route::get('obstetricia', libroobstetriciaController::class)->name('emergencias.obstetricia');
     });
-
+    
 });

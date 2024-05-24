@@ -1,0 +1,23 @@
+    function eliminar($id){
+        DB::beginTransaction();
+
+        try {
+            $servicio = ServicioModel::find($id);
+
+            if(is_null($servicio)){
+                $resp["type"] = 'error';
+                $resp["message"] = 'No encontrado';
+            }else{
+                $servicio->delete();
+                $resp["type"] = 'success';
+                $resp["message"] = 'Eliminado con exito';
+            }
+            DB::commit();
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            $resp["type"] = 'error';
+            $resp["message"] = 'No se pudo eliminar';
+        }
+        $this->dispatch('alert', $resp);        
+    }

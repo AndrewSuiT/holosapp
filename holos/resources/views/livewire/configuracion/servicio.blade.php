@@ -70,24 +70,24 @@
 </x-content-body>
 
 @push('scripts')
-<script>
-    function confirmar(id = "") {
-        Swal.fire({
-            text: '¿Seguro que desea eliminar?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Si, eliminar',
-            cancelButtonText: 'Cancelar',
-            customClass: {
-                confirmButton: 'btn btn-primary',
-                cancelButton: 'btn btn-outline-danger ml-1'
-            },
-            buttonsStyling: false
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @this.eliminar(id);
-            }
-        });
-    }
-</script>
+    <script>
+        function confirmar(id = "") {
+            Swal.fire({
+                text: '¿Seguro que desea eliminar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Si, eliminar',
+                cancelButtonText: 'Cancelar',
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-outline-danger ml-1'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    @this.eliminar(id);
+                }
+            });
+        }
+    </script>
 @endpush

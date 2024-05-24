@@ -93,31 +93,6 @@ class MenuSeeder extends Seeder
                     ]
                 ]
             ],
-            [
-                'name' => 'Estadísticas',
-                'routeName' => 'Estadistica',
-                'slug' => 'Estadistica',
-                'icon' => 'bar-chart',
-                'order' => 5,
-                'children' => [
-                    /*[
-                        'name' => 'General',
-                        'routeName' => 'configuracion.departamento',
-                        'slug' => 'configuracion/departamento',
-                        'icon' => 'circle',
-                        'order' => 1,
-                        
-                    ],*/
-                    [
-                        'name' => 'Reporte 1',
-                        'routeName' => 'estadistica.reporte',
-                        'slug' => 'estadistica/reporte',
-                        'icon' => 'circle',
-                        'order' => 1,
-                        
-                    ]
-                ]
-            ],
         ];
         $this->insertDatas($data);
     }

@@ -1719,7 +1719,7 @@ progress {
   opacity: 1; }
 
 .form-control::file-selector-button {
-  padding: 0.571rem 1rem;
+  padding: 0.571rem rem;
   margin: -0.571rem -1rem;
   margin-inline-end: 1rem;
   color: #6e6b7b;
@@ -1905,6 +1905,40 @@ textarea.form-control-lg {
   border: 1px solid #d8d6de;
   appearance: none;
   color-adjust: exact; }
+
+.form-check-input-d {
+  width: 1.885rem;
+  height: 1.885rem;
+  margin-top: 0.0825rem;
+  vertical-align: top;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid #d8d6de;
+  appearance: none;
+  color-adjust: exact; }
+
+.form-check-input-d[type="checkbox"] {
+  border-radius: 3px; }
+  
+.form-check-input-d[type="radio"] {
+  border-radius: 50%; }
+  
+.form-check-input-d:active {
+  filter: brightness(90%); }
+  
+.form-check-input-d:focus {
+  border-color: #7367f0;
+  outline: 0;
+  box-shadow: 0 2px 4px 0 rgba(115, 103, 240, 0.4); }
+  
+.form-check-input-d:checked {
+  background-color: #7367f0;
+  border-color: #7367f0; }
+  
+.form-check-input-d:checked[type="checkbox"] {
+  background-image: url("data:image/svg+xml;charset=utf8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9.5 7.5'%3e%3cpolyline points='0.75 4.35 4.18 6.75 8.75 0.75' style='fill:none;stroke:%23fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px'/%3e%3c/svg%3e"); }
 
 .form-check-input[type="checkbox"] {
   border-radius: 3px; }

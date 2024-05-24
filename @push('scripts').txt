@@ -1,0 +1,30 @@
+<div>
+    <label for="listContact">Select contact:</label>
+    <input wire:model="optionContact" type="text" list="listContact" class="form-control">
+    <datalist  name="" id="listContact">
+        @foreach ($contacts as $contact)
+        <option value="{{$contact->name}}">{{$contact->name}}</option>
+        @endforeach
+    </datalist>
+</div>
+
+
+
+<?php
+namespace App\Http\Livewire;
+use App\Models\Contact;
+use Livewire\Component;
+
+class ContactSelect extends Component
+{
+    public $optionContact = '';
+    public function render()
+    {
+        return view(
+            'livewire.contact-select',
+            ['contacts' => Contact::where('name', 'like', "%$this->optionContact%")
+                ->limit(5)
+                ->get()]
+        );
+    }
+}
