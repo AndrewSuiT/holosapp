@@ -117,7 +117,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <x-divider text="." />
-                <x-form-input type="number" label='DNI:' model="emergencia.DNI" wire:model='emergencia.DNI' />
+                <x-form-input type="number" label='DNI:' model="emergencia.DNI" wire:model='emergencia.DNI' wire:change="buscarPorDNI" />
                 <x-form-input type="datetime-local" label='FICHAFAM:' model="emergencia.FICHAFAM"
                     wire:model='emergencia.FICHAFAM' />
                 <x-form-input label='NHCL:' model="emergencia.NHCL" wire:model='emergencia.NHCL' />
@@ -127,12 +127,11 @@
             </div>
             <div class="col-sm-4">
                 <x-divider text="." />
-                <x-form-input label='APELLIDOS Y NOMBRES:' model="emergencia.APELLIDOSYNOMBRES"
-                    wire:model='emergencia.APELLIDOSYNOMBRES' />
+                <x-form-input label='APELLIDOS Y NOMBRES:' model="emergencia.APELLIDOSYNOMBRES"  wire:model='emergencia.APELLIDOSYNOMBRES' readonly />
                 <x-form-select :datas="['N' => 'N', 'C' => 'C', 'R' => 'R']" label='NCR: ' model="emergencia.NCR" wire:model='emergencia.NCR' />
                 <x-form-input type="number" label='EDAD:' model="emergencia.EDAD" wire:model='emergencia.EDAD' />
                 <x-form-select :datas="['F' => 'Femenino', 'M' => 'Masculino']" label='SEXO:' model="emergencia.SEXO" wire:model='emergencia.SEXO' />
-                <x-form-input label='DIRECCIÓN:' model="emergencia.DIRECCIÓN" wire:model='emergencia.DIRECCIÓN' />
+                <x-form-input label='DIRECCIÓN:' model="emergencia.DIRECCIÓN" wire:model='emergencia.DIRECCIÓN' readonly />
                 <div>
                     <x-form-input list='emergencia.diagnosticoId' label='DIAGNOSTICO: '
                         model="emergencia.diagnosticoId" wire:model='emergencia.diagnosticoId' />
@@ -219,4 +218,25 @@
         })
     })
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var formInputs = document.querySelectorAll('input, select, textarea');
+    
+            formInputs.forEach(function (input) {
+                input.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        var index = Array.prototype.indexOf.call(formInputs, input);
+                        var nextIndex = index + 1;
+    
+                        if (nextIndex < formInputs.length) {
+                            formInputs[nextIndex].focus();
+                            event.preventDefault(); // Evitar el comportamiento por defecto del Enter (enviar formulario)
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    
 @endpush
+        

@@ -4,6 +4,7 @@ namespace App\Livewire\Emergencia;
 
 use App\Models\cie10hai;
 use App\Models\libroemergencia as libroemergencia;
+use App\Models\pacientes;
 use App\Models\personalcs;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -81,7 +82,7 @@ class libroemergenciaController extends Component
                 function ($attribute, $value, $fail) {
                     $found = $this->cie_10->contains($value);
                     if (!$found) {
-                        $this->mensajeError = 'El diagnóstico seleccionado no es válido.';
+                        //$this->mensajeError = 'El diagnóstico seleccionado no es válido.';
                         $fail('El diagnóstico seleccionado no es válido.');
                     }
                 },
@@ -95,7 +96,7 @@ class libroemergenciaController extends Component
                 function ($attribute, $value, $fail) {
                     $found = $this->personal_ai->contains($value);
                     if (!$found) {
-                        $this->mensajeError2 = 'El responsable seleccionado no es válido.';
+                        //$this->mensajeError2 = 'El responsable seleccionado no es válido.';
                         $fail('El responsable seleccionado no es válido.');
                     }
                 },
@@ -105,7 +106,7 @@ class libroemergenciaController extends Component
                 function ($attribute, $value, $fail) {
                     $found = $this->personal_ai->contains($value);
                     if (!$found) {
-                        $this->mensajeError2 = 'El responsable seleccionado no es válido.';
+                        //$this->mensajeError2 = 'El responsable seleccionado no es válido.';
                         $fail('El responsable seleccionado no es válido.');
                     }
                 },
@@ -113,7 +114,24 @@ class libroemergenciaController extends Component
             'emergencia.OBSERV' => 'nullable'
         ];
     }
+    
+    // Método para buscar información por DNI en tiempo real
+    public function buscarPorDNI()
+    {
+        // Buscar en la otra base de datos utilizando el DNI
+        $informacion = pacientes::where('dni', $this->emergencia->DNI)->first();
 
+        // Si se encuentra la información, actualizar los campos del formulario
+        if ($informacion) {
+            $this->emergencia->APELLIDOSYNOMBRES = $informacion->nombresapellidos;
+            $this->emergencia->DIRECCIÓN = $informacion->dirrecion;
+        }
+        else {
+            // Si el DNI no existe en la base de datos, borrar los campos
+            $this->emergencia->APELLIDOSYNOMBRES = '';
+            $this->emergencia->DIRECCIÓN = '';
+        }
+    }
 
     function muestraModal($id = "") : void {
         $this->inicializaDatos($id);

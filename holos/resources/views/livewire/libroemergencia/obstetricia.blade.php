@@ -227,4 +227,23 @@
             });
         }
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var formInputs = document.querySelectorAll('input, select, textarea');
+    
+            formInputs.forEach(function (input) {
+                input.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        var index = Array.prototype.indexOf.call(formInputs, input);
+                        var nextIndex = index + 1;
+    
+                        if (nextIndex < formInputs.length) {
+                            formInputs[nextIndex].focus();
+                            event.preventDefault(); // Evitar el comportamiento por defecto del Enter (enviar formulario)
+                        }
+                    }
+                });
+            });
+        });
+    </script>   
 @endpush
