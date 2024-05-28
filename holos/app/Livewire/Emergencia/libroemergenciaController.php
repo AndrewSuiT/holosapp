@@ -18,16 +18,12 @@ class libroemergenciaController extends Component
 {
     use WithPagination;
     public $librodeemergencia;
-    public $emergencia;
-    public $tituloModal;
+    public $emergencia, $tituloModal;
     public $search, $search2, $search3;
     public $FECHASELECT;
-    public $startDate;
-    public $endDate;
-    public $cie_10;
-    public $personal_ai;
-    public $mensajeError = '';
-    public $mensajeError2 = '';
+    public $startDate, $endDate;
+    public $cie_10, $personal_ai;
+    public $mensajeError = '', $mensajeError2 = '';
 
 
     function mount() : void {

@@ -1,5 +1,9 @@
 <x-content-body :title='$tituloObstetricia'>
     <x-slot name="buttons">
+        <button class="btn btn-relief-primary" id="btn-xlsx" style='margin-right: 3rem ; background-color:#2c7900'>
+            <i class="fa fa-download"></i>
+            Descargar Libro
+        </button>
         <button class="btn btn-relief-primary" wire:click='muestraModal' style="padding: 1rem 2rem">Registrar</button>
     </x-slot>
 
@@ -245,5 +249,16 @@
                 });
             });
         });
+    </script>
+    <script>
+        $(document).ready(function(){
+        $('#btn-xlsx').click(function(){
+            let startDate = $('#basicInput').val();
+            let endDate = $('#basicInput2').val();
+
+            let ruta = @json(route('obstetricia.formato-xlsx')) + `?startDate=${startDate}&endDate=${endDate}`;
+            window.open(ruta, '_blank');
+        })
+    })
     </script>   
 @endpush

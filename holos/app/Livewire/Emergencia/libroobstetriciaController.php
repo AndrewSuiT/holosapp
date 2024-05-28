@@ -10,9 +10,12 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class libroobstetriciaController extends Component
 {
+    use WithPagination;
     public $tituloObstetricia;
     public $obstetrico;
     public $tituloModal, $obstetrica;
@@ -170,6 +173,10 @@ class libroobstetriciaController extends Component
             $resp["message"] = 'No se pudo eliminar'. $e->getMessage();
         }
         $this->dispatch('alert', $resp);        
+    }
+
+    function descargarXls() {
+        
     }
 
     #[Layout('layouts.app2')] 

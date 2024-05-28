@@ -1,6 +1,6 @@
 <x-content-body :title='$librodeemergencia'>
     <x-slot name="buttons">
-        <button class="btn btn-relief-primary" id="btn-xlsx" style='margin-right: 5rem ; background-color:#2c7900'>
+        <button class="btn btn-relief-primary" id="btn-xlsx" style='margin-right: 3rem ; background-color:#2c7900'>
             <i class="fa fa-download"></i>
             Descargar Libro
         </button>
