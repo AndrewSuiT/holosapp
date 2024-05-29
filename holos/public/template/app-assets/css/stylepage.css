@@ -54,7 +54,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 230, 167, 86;
+  --bs-primary-rgb: 93, 91, 94;
   --bs-secondary-rgb: 47, 23, 15;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
@@ -2857,20 +2857,20 @@ textarea.form-control-lg {
 }
 
 .btn-primary {
-  --bs-btn-color: #000;
-  --bs-btn-bg: #e6a756;
-  --bs-btn-border-color: #e6a756;
-  --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #eab46f;
-  --bs-btn-hover-border-color: #e9b067;
+  --bs-btn-color: #ffffff;
+  --bs-btn-bg: hsl(280, 100%, 28%);
+  --bs-btn-border-color: #780083;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: #aa56f4;
+  --bs-btn-hover-border-color: #b86bfa;
   --bs-btn-focus-shadow-rgb: 196, 142, 73;
-  --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #ebb978;
-  --bs-btn-active-border-color: #e9b067;
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-bg: #b86bfa;
+  --bs-btn-active-border-color: #b86bfa;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: #e6a756;
-  --bs-btn-disabled-border-color: #e6a756;
+  --bs-btn-disabled-color: #ffffff;
+  --bs-btn-disabled-bg: #b86bfa;
+  --bs-btn-disabled-border-color: #b86bfa;
 }
 
 .btn-secondary {
@@ -3741,7 +3741,7 @@ textarea.form-control-lg {
 .navbar {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0.5rem;
-  --bs-navbar-color: rgba(0, 0, 0, 0.55);
+  --bs-navbar-color: rgba(255, 255, 255, 0.55);
   --bs-navbar-hover-color: rgba(0, 0, 0, 0.7);
   --bs-navbar-disabled-color: rgba(0, 0, 0, 0.3);
   --bs-navbar-active-color: rgba(0, 0, 0, 0.9);
@@ -10853,16 +10853,16 @@ p {
 }
 
 .site-heading {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
   line-height: 1;
   font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 .site-heading .site-heading-upper {
   display: block;
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 3rem;
+  font-weight: 900;
 }
 .site-heading .site-heading-lower {
   font-size: 5rem;
@@ -10890,7 +10890,7 @@ p {
 }
 
 .bg-faded {
-  background-color: #e5ebfa;
+  background-color: white;
 }
 
 .btn-xl {
@@ -10904,13 +10904,14 @@ p {
 
 #mainNav {
   background-color: rgba(88, 0, 149, 0.9);
-  font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
 }
 #mainNav .navbar-brand {
   color: #e6a756;
 }
 #mainNav .navbar-nav .nav-item .nav-link {
-  color: rgba(255, 255, 255, 0.7);
+  color: white;
   font-weight: 800;
 }
 #mainNav .navbar-nav .nav-item.active .nav-link {
@@ -10918,7 +10919,7 @@ p {
 }
 @media (min-width: 992px) {
   #mainNav .navbar-nav .nav-item .nav-link {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   #mainNav .navbar-nav .nav-item .nav-link:hover {
     color: rgba(255, 255, 255, 0.4);
