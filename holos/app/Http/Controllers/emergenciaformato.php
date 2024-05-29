@@ -52,11 +52,16 @@ class emergenciaformato extends Controller
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Centrar texto
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER, // Centrar Vertical
+                'wrapText' => true,
             ],
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, // Tipo de relleno sólido
                 'startColor' => ['argb' => '4ED7F5'], // Color de fondo (en este caso, verde claro)
             ],
+            'font' => [
+                'bold' => false,
+                'size' => 10
+            ]
         ];
 
         $ini = 1;
@@ -90,7 +95,7 @@ class emergenciaformato extends Controller
 
         $sheet->getStyle('A'.$ini.':U'.$ini+1)->applyFromArray($headerStyle);
         $ini += 2;
-        $sheet->getStyle('A'.$ini.':U'.$ini)->applyFromArray($bodyStyle);
+        $sheet->getStyle('A'.$ini.':U'.$ini+100)->applyFromArray($bodyStyle);
         $ini -= 2;
 
         $sheet->mergeCells('A'.$ini.':A'.$ini+1)->setCellValue('A'.$ini,'N°');

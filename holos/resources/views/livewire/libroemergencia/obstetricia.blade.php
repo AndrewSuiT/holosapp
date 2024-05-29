@@ -142,8 +142,8 @@
     <x-modal :modalTitulo="$tituloModal" tipo="modal-xl">
         <div class="row">
             <div class="col-sm-4">
-                <x-form-input type="number" label='N° HC:' model="obstetrica.n_hc" wire:model='obstetrica.n_hc' />
-                <x-form-input label='APELLIDOS Y NOMBRES:' model="obstetrica.apellidosynombres" wire:model='obstetrica.apellidosynombres' />
+                <x-form-input type="number" label='N° HC:' model="obstetrica.n_hc" wire:model='obstetrica.n_hc' wire:change="buscarPorDNI" />
+                <x-form-input label='APELLIDOS Y NOMBRES:' model="obstetrica.apellidosynombres" wire:model='obstetrica.apellidosynombres' readonly/>
                 <x-form-input type='number' label='EDAD:' model="obstetrica.edad" wire:model='obstetrica.edad' />
                 <x-form-input type='number' label='G :' model="obstetrica.g" wire:model='obstetrica.g' />
                 <x-form-input type='number' label='P :' model="obstetrica.p" wire:model='obstetrica.p' />
@@ -152,7 +152,7 @@
                 <x-form-input type='number' label='HIJOS FALLEC:' model="obstetrica.hijos_fallec" wire:model='obstetrica.hijos_fallec' />
                 <x-form-input label='EDAD GESTACION:' model="obstetrica.edad_gestacion" wire:model='obstetrica.edad_gestacion' />
                 <x-form-input label='N° DE CONTROL:' model="obstetrica.n_control" wire:model='obstetrica.n_control' />
-                <x-form-input label='DOMICILIO:' model="obstetrica.domicilio" wire:model='obstetrica.domicilio' />
+                <x-form-input label='DOMICILIO:' model="obstetrica.domicilio" wire:model='obstetrica.domicilio' readonly />
             </div>
             <div class="col-sm-4">
                 <x-form-input type="date" label='FECHA DE PARTO:' model="obstetrica.fecha_parto" wire:model='obstetrica.fecha_parto' />

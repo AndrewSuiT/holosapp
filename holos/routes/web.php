@@ -59,7 +59,7 @@ Route::group(['middleware'=> 'auth'],function() {
         Route::get('libroemergencias', libroemergenciaController::class)->name('emergencias.libroemergencias');
         Route::get('general-xlsx/', [App\Http\Controllers\emergenciaformato::class, 'generalXls'])->name('emergencia.formato-xlsx');
         Route::get('obstetricia', libroobstetriciaController::class)->name('emergencias.obstetricia');
-        Route::get('general-xlsx/', [App\Http\Controllers\obstetriciaformato::class, 'generalXls'])->name('obstetricia.formato-xlsx');
+        Route::get('general2-xlsx/', [App\Http\Controllers\obstetriciaformato::class, 'general2Xls'])->name('obstetricia.formato-xlsx');
         
     });
     

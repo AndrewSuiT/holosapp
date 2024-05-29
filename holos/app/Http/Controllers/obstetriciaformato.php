@@ -10,7 +10,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class obstetriciaformato extends Controller
 {
-    function generalXls(Request $request){
+    function general2Xls(Request $request){
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
 
@@ -106,7 +106,7 @@ class obstetriciaformato extends Controller
 
         $sheet->getStyle('A'.$ini.':AE'.$ini+1)->applyFromArray($headerStyle);
         $ini += 2;
-        $sheet->getStyle('A'.$ini.':AE'.$ini)->applyFromArray($bodyStyle);
+        $sheet->getStyle('A'.$ini.':AE'.$ini+100)->applyFromArray($bodyStyle);
         $ini -= 2;
 
         $sheet->mergeCells('A'.$ini.':A'.$ini+1)->setCellValue('A'.$ini,'N° DE ORDEN');

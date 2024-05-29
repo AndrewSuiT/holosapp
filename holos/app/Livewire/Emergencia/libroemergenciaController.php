@@ -135,8 +135,8 @@ class libroemergenciaController extends Component
         $this->dispatch('openModal');
     }
     function cierraModal(){
-        $this->mensajeError = '';
-        $this->mensajeError2 = '';
+        //$this->mensajeError = '';
+        //$this->mensajeError2 = '';
         $this->dispatch('closeModal');
     }
 

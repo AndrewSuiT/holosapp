@@ -3,6 +3,7 @@
 namespace App\Livewire\Emergencia;
 
 use App\Models\libroobstetricia;
+use App\Models\pacientes;
 use App\Models\personalcs;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -101,6 +102,22 @@ class libroobstetriciaController extends Component
             'obstetrica.observaciones' => 'nullable',
 
         ];
+    }
+    public function buscarPorDNI()
+    {
+        // Buscar en la otra base de datos utilizando el DNI
+        $informacion = pacientes::where('dni', $this->obstetrica->n_hc)->first();
+
+        // Si se encuentra la información, actualizar los campos del formulario
+        if ($informacion) {
+            $this->obstetrica->apellidosynombres = $informacion->nombresapellidos;
+            $this->obstetrica->domicilio = $informacion->dirrecion;
+        }
+        else {
+            // Si el DNI no existe en la base de datos, borrar los campos
+            $this->obstetrica->apellidosynombres = '';
+            $this->obstetrica->domicilio = '';
+        }
     }
     function muestraModal($id = "") : void {
         $this->inicializaDatos($id);
