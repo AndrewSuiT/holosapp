@@ -18,14 +18,7 @@
   <body>
     <!-- Page-->
     <div class="page bg-image novi-background">
-      <div class="preloader">
-        <div class="preloader-body">
-          <div class="cssload-container">
-            <div class="cssload-speeding-wheel"></div>
-          </div>
-          <p>Loading...</p>
-        </div>
-      </div>
+      
       <!-- Page Header-->
       <header class="section page-header">
         <div class="container">
@@ -56,10 +49,11 @@
                 <div class="tabs-custom tabs-horizontal tabs-gallery hide-on-modal" id="tabs-galery">
                   <!-- Nav tabs-->
                   <ul class="nav nav-tabs">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="permiso/solicita" data-toggle="tab"><img src="../assets/img/permiso.jpg" alt="" width="180" height="180"/><span>PEDIR PERMISO</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="anexo/anexo" data-toggle="tab"><img src="../assets/img/anexos.jpg" alt="" width="180" height="180"/><span>ANEXOS - TELEFONOS</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="cie-10" data-toggle="tab"><img src="../assets/img/cie10black.jpg" alt="" width="180" height="180"/><span>CIE 10</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="visor-rx" data-toggle="tab"><img src="../assets/img/visorrx.jpg" alt="" width="180" height="180"/><span>VISOR RX</span></a></li>
+                    <!--<li class="nav-item" role="presentation"><a class="nav-link" href="permiso/solicita" data-toggle="tab"><img src="../assets/img/permiso.jpg" alt="" width="180" height="180"/><span>PERMISO</span></a></li>-->
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="permiso/solicita"><img src="../assets/img/permiso.jpg" alt="" width="180" height="180"/><span>PERMISO</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="anexo/anexo" ><img src="../assets/img/anexos.jpg" alt="" width="180" height="180"/><span>ANEXOS</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="cie-10" ><img src="../assets/img/cie10black.jpg" alt="" width="180" height="180"/><span>CIE 10</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="visor-rx" ><img src="../assets/img/visorrx.jpg" alt="" width="180" height="180"/><span>VISOR RX</span></a></li>
                   </ul>
       <!-- Page Footer-->
       <footer class="section footer-classic context-dark novi-background">
@@ -71,13 +65,9 @@
             <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>.&nbsp;</span>Derechos reservados&nbsp;a&nbsp;<a href="/">HOLOS - HOSPITAL ALTO INCLAN</a></p>
           </div>
         </div>
-        <!-- Coded by JeremyLuis-->
       </footer>
-    <!-- Global Mailform Output-->
-    <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
     <script src="../template/app-assets/js/core/core.min.js"></script>
     <script src="../template/app-assets/js/scripts/script.js"></script>
-    <!-- coded by ragnar-->
   </body>
 </html>
