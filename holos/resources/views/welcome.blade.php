@@ -1,84 +1,83 @@
 <!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>HOLOS - HOSPITAL ALTO INCLAN</title>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link rel="stylesheet" type="text/css" href="{{ asset('template/assets/css/style.css') }}">
+<html class="wide" lang="en">
+  <head>
+    <!-- Site Title-->
+    <title>HOLOS</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="../assets/img/favicon2.ico" type="../assets/img/x-icon">
+    <!-- Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Barlow:100,200,300,400,700">
+    <link rel="stylesheet" href="../template/app-assets/css/bootstrap2.css">
+    <link rel="stylesheet" href="../template/app-assets/css/fonts.css">
+    <link rel="stylesheet" href="../template/app-assets/css/style.css">
 
-        <!-- BEGIN: Vendor CSS-->
-        <link rel="stylesheet" type="text/css" href="{{ asset('template/app-assets/vendors/css/vendors.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('template/app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
-        <!-- END: Vendor CSS-->
-
-        <!-- BEGIN: Theme CSS-->
-        <link rel="stylesheet" type="text/css" href="{{ asset('template/app-assets/css/stylepage.css') }}">
-
-    </head>
-    <body>
-        <header>
-            <h1 class="site-heading text-center text-faded d-none d-lg-block">
-                <span class="site-heading-upper text-primary mb-3" >BIENVENIDO A HOLOS</span>
-                <!--<span class="site-heading-lower">Business Casual</span>-->
-            </h1>
-        </header>
-
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand text-uppercase fw-bold d-lg-none" >BIENVENIDO A HOLOS</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ route('permiso.solicita') }}">PEDIR PERMISO</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="about.html">ANEXOS TEL.</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="products.html">CIE 10</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="store.html">VISOR RX</a></li>
-                    </ul>
-                </div>
+  </head>
+  <body>
+    <!-- Page-->
+    <div class="page bg-image novi-background">
+      <div class="preloader">
+        <div class="preloader-body">
+          <div class="cssload-container">
+            <div class="cssload-speeding-wheel"></div>
+          </div>
+          <p>Loading...</p>
+        </div>
+      </div>
+      <!-- Page Header-->
+      <header class="section page-header">
+        <div class="container">
+          <div class="row justify-content-between align-items-end row-30">
+            <div class="col-12 col-md-6"><a class="brand-logo" href="./"><img src="../assets/img/logo-proyect.png" alt="" width="346" height="62"/></a></div>
+            <div class="col-12 col-md-6 col-xl-4">
+              <div class="head-title">
+                <p><br class="d-none d-md-inline-block"><a class="nav-link" href="login"><span>INICIAR SESION</span></a></p>
+              </div>
             </div>
-        </nav>
-        <section class="page-section clearfix">
-            <div class="container">
-                <div class="intro">
-                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="assets/img/portada.jpg" alt="..." />
-                    <div class="intro-text left-0 text-center bg-faded p-5 rounded">
-                        <h2 class="section-heading mb-4">
-                            <span class="section-heading-upper">HOLOS</span>
-                            <span class="section-heading-lower">ACCEDER A LA PLATAFORMA</span>
-                        </h2>
-                        <p class="mb-3">Administracion de cuenta y accesos a servicios por usuario.</p>
-                        <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="{{ route('login') }}">INICIAR SESION</a></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--<section class="page-section cta">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-9 mx-auto">
-                        <div class="cta-inner bg-faded text-center rounded">
-                            <h2 class="section-heading mb-4">
-                                <span class="section-heading-upper">Our Promise</span>
-                                <span class="section-heading-lower">To You</span>
-                            </h2>
-                            <p class="mb-0">When you walk into our shop to start your day, we are dedicated to providing you with friendly service, a welcoming atmosphere, and above all else, excellent products made with the highest quality ingredients. If you are not satisfied, please let us know and we will do whatever we can to make things right!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>-->
-        <footer class="footer text-faded text-center py-5">
-            <div class="container"><p class="m-0 small">Copyright &copy; Holos - Hospital de Alto Inclan</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-    </body>
+          </div>
+        </div>
+      </header>
+      <section class="section section-xs">
+        <div class="container">
+          <!-- Bootstrap tabs-->
+          <div class="tabs-custom tabs-horizontal tabs-corporate" id="tabs-1">
+            <!-- Nav tabs
+            <ul class="nav nav-tabs">
+              <li class="nav-item" role="presentation"><a class="nav-link active" href="#tabs-1-1" data-toggle="tab"><span class="nav-link-main">gallery</span></a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-2" data-toggle="tab"><span class="nav-link-main">about me</span></a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-3" data-toggle="tab"><span class="nav-link-main">services</span></a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-4" data-toggle="tab"><span class="nav-link-main">contacts</span></a></li>
+            </ul> -->
+            <!-- Tab panes-->
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="tabs-1-1">
+                <div class="tabs-custom tabs-horizontal tabs-gallery hide-on-modal" id="tabs-galery">
+                  <!-- Nav tabs-->
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="permiso/solicita" data-toggle="tab"><img src="../assets/img/permiso.jpg" alt="" width="180" height="180"/><span>PEDIR PERMISO</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="anexo/anexo" data-toggle="tab"><img src="../assets/img/anexos.jpg" alt="" width="180" height="180"/><span>ANEXOS - TELEFONOS</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="cie-10" data-toggle="tab"><img src="../assets/img/cie10black.jpg" alt="" width="180" height="180"/><span>CIE 10</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="visor-rx" data-toggle="tab"><img src="../assets/img/visorrx.jpg" alt="" width="180" height="180"/><span>VISOR RX</span></a></li>
+                  </ul>
+      <!-- Page Footer-->
+      <footer class="section footer-classic context-dark novi-background">
+        <div class="container">
+          <div class="footer-group">
+            <ul class="list-inline list-inline-xs">
+            </ul>
+            <!-- Rights-->
+            <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>.&nbsp;</span>Derechos reservados&nbsp;a&nbsp;<a href="/">HOLOS - HOSPITAL ALTO INCLAN</a></p>
+          </div>
+        </div>
+        <!-- Coded by JeremyLuis-->
+      </footer>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="../template/app-assets/js/core/core.min.js"></script>
+    <script src="../template/app-assets/js/scripts/script.js"></script>
+    <!-- coded by ragnar-->
+  </body>
 </html>
