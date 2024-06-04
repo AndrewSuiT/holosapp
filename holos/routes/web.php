@@ -3,6 +3,7 @@
 //use App\Http\Controllers\libroemergenciaController;
 use App\Livewire\Administracion\Rol;
 use App\Livewire\Administracion\Usuario;
+use App\Livewire\Anexo\AnexoController;
 use App\Livewire\Configuracion\Departamento;
 use App\Livewire\Configuracion\Servicio;
 use App\Livewire\indexlibro;
@@ -31,6 +32,7 @@ Route::get('/', function () {
 });
 
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');
+Route::get('anexo/anexo', AnexoController::class)->name('anexo.anexo');
 
 //Route::get('libroemergencias', libroemergenciaController::class)->name('libroemergencia');
 
