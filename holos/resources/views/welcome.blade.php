@@ -18,6 +18,14 @@
   <body>
     <!-- Page-->
     <div class="page bg-image novi-background">
+      <!--<div class="preloader">
+        <div class="preloader-body">
+          <div class="cssload-container">
+            <div class="cssload-speeding-wheel"></div>
+          </div>
+          <p>Loading...</p>
+        </div>
+      </div>-->
       
       <!-- Page Header-->
       <header class="section page-header">
