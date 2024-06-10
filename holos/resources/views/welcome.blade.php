@@ -59,7 +59,7 @@
                   <ul class="nav nav-tabs">
                     <!--<li class="nav-item" role="presentation"><a class="nav-link" href="permiso/solicita" data-toggle="tab"><img src="../assets/img/permiso.jpg" alt="" width="180" height="180"/><span>PERMISO</span></a></li>-->
                     <li class="nav-item" role="presentation"><a class="nav-link" href="permiso/solicita"><img src="../assets/img/permiso.jpg" alt="" width="180" height="180"/><span>PERMISO</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="anexo/anexo" ><img src="../assets/img/anexos.jpg" alt="" width="180" height="180"/><span>ANEXOS</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="anexo" ><img src="../assets/img/anexos.jpg" alt="" width="180" height="180"/><span>ANEXOS</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="cie-10" ><img src="../assets/img/cie10black.jpg" alt="" width="180" height="180"/><span>CIE 10</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="visor-rx" ><img src="../assets/img/visorrx.jpg" alt="" width="180" height="180"/><span>VISOR RX</span></a></li>
                   </ul>

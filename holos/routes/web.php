@@ -4,6 +4,7 @@
 use App\Livewire\Administracion\Rol;
 use App\Livewire\Administracion\Usuario;
 use App\Livewire\Anexo\AnexoController;
+use App\Livewire\cie10\Cie10Controller;
 use App\Livewire\Configuracion\Departamento;
 use App\Livewire\Configuracion\Servicio;
 use App\Livewire\indexlibro;
@@ -32,7 +33,8 @@ Route::get('/', function () {
 });
 
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');
-Route::get('anexo/anexo', AnexoController::class)->name('anexo.anexo');
+Route::get('anexo', AnexoController::class)->name('anexo');
+Route::get('cie-10', Cie10Controller::class)->name('cie-10');
 
 //Route::get('libroemergencias', libroemergenciaController::class)->name('libroemergencia');
 
